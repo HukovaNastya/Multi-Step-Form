@@ -1,12 +1,23 @@
 import Form from "../Form/Form.tsx";
+import FormHeader from "../FormHeader/FormHeader.tsx";
 
 const RegistrationForm = () => {
     return (
         <div className='registration-form-wrapper'>
             <Form className='registration-form'>
-                <div className='form-header d-flex flex-column align-center'>
-                    <h1 className='form-title'>Registration Form</h1>
-                    <h3 className='form-text'>Please fill out this form with the required information</h3>
+                <div className='d-flex flex-column align-center'>
+                    <FormHeader/>
+                </div>
+                <div className='form-inner-wrapper'>
+                    <div className='form-progress-bar'>
+
+                    </div>
+                    <div className='form-account-options'>
+
+                    </div>
+                    <div className='form-buttons'>
+
+                    </div>
                 </div>
             </Form>
         </div>

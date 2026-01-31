@@ -6,7 +6,6 @@ interface FormProps {
     children?:ReactNode;
 }
 
-
 const Form:React.FC<FormProps> = ({children, onSubmit, className}) => {
     return (
         <div>
