@@ -1,11 +1,12 @@
 import './App.css'
+import Form from "./components/Form/Form.tsx";
 
 function App() {
 
   return (
-    <>
-        <h1>Hello word!</h1>
-    </>
+    <div className='home'>
+       <Form/>
+    </div>
   )
 }
 
