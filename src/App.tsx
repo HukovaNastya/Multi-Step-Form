@@ -1,11 +1,11 @@
 import './App.css'
-import Form from "./components/Form/Form.tsx";
+import RegistrationForm from "./components/RegistrationForm/RegistrationForm.tsx";
 
 function App() {
 
   return (
-    <div className='home'>
-       <Form/>
+    <div className='container'>
+      <RegistrationForm/>
     </div>
   )
 }
