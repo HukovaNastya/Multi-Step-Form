@@ -58,9 +58,21 @@ body {
 .form-text {
   color: #C8C8D0;
   font-weight: 400;
-  font-size: 14px;
-  margin-top: 16px;
   text-align: center;
-
 }
 
+.text-large {
+  font-size: 28px;
+}
+
+.text-medium {
+  font-size: 14px;
+}
+
+.text-small {
+  font-size: 12px;
+}
+
+.form-header div + div {
+  padding-top: 16px;
+}
