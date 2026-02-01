@@ -4,6 +4,7 @@ import Typography from "../Typography/Typography.tsx";
 
 type Step = {
    label: string;
+   id: number;
 }
 
 interface StepperProps {
@@ -14,13 +15,13 @@ interface StepperProps {
 
 
 // const Stepper:React.FC<StepperProps>  = ({steps, current = 0, onStepClick}) => {
-const Stepper:React.FC<StepperProps>  = ({steps}) => {
+const Stepper:React.FC<StepperProps>  = ({steps, current = 0,}) => {
    if (steps.length === 0) {
       return <div className="text-center text-gray-500 border rounded-xl bg-gray-50 p-4">
          No steps defined
       </div>
    }
-   // const safeCurrent = Math.min(Math.max(current, 0), steps.length - 1);
+   const safeCurrent = Math.min(Math.max(current, 0), steps.length - 1);
 
    return (
     <div className='stepper-container'>
@@ -28,15 +29,16 @@ const Stepper:React.FC<StepperProps>  = ({steps}) => {
 
        <div className='d-flex justify-center'>
           {steps.map((step, index) => {
+             const active = index === safeCurrent;
              return (
                  <div key={index} className='d-flex flex-column align-center stepper-item__wrapper'>
-                    <div className='stepper-item'>
+                    <div className={active ? 'stepper-active__item stepper-item': 'stepper-item'}>
                        <Typography variant='h4' className='text-medium-secondary form-text stepper-item-text'>
                           {index + 1}
                        </Typography>
                     </div>
                     <div className='stepper-item-label'>
-                       <Typography variant='h4' className='text-small form-text stepper-item-text'>
+                       <Typography variant='h4' className={`${active ? "stepper-item__active-text" : "color-grey" }text-small form-text stepper-item-text`}>
                           {step.label}
                        </Typography>
                     </div>
@@ -44,6 +46,7 @@ const Stepper:React.FC<StepperProps>  = ({steps}) => {
              )
           })}
        </div>
+
     </div>
    )
 }

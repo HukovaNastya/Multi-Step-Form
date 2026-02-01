@@ -15,12 +15,15 @@
 
 .stepper-item-text {
     text-align: center;
-    color: #C8C8D0;
     font-weight: 400;
     position: relative;
     top: 50%;
     transform: translate(0, -50%);
 
+}
+
+.stepper-item__active-text {
+    color: #ffffff !important;
 }
 
 .stepper-item-label {
@@ -35,5 +38,11 @@
 
 .stepper-item__wrapper  {
     position: relative;
-    top: -15px
+    top: -15px;
+}
+
+.stepper-active__item {
+    color: #fff;
+    background-color: #B991FF;
+    border: 1px solid #B991FF;
 }

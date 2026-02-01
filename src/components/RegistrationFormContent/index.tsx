@@ -6,9 +6,9 @@ import './RegistrationFormContent.css';
 const RegistrationFormContent = () => {
     const steps = useMemo(() => {
         return [
-            {label: 'Account Type'},
-            {label: 'Personal Information'},
-            {label: 'Profile Data'},
+            {id: 1, label: 'Account Type'},
+            {id: 2, label: 'Personal Information'},
+            {id: 3, label: 'Profile Data'},
         ];
 
     }, [])
