@@ -1,3 +1,24 @@
 .form-stepper-wrapper {
     padding-top: 40px;
 }
+
+.form-buttons {
+    padding-top: 70px;
+}
+
+.form-buttons div + div {
+    margin-left: 16px;
+}
+
+.form-button {
+    padding: 10px 16px;
+    background-color: #ffff;
+    border: 1px solid #D4D4D8;
+    cursor: pointer;
+}
+
+.active-button {
+    background-color: #B991FF;
+    border: 1px solid #B991FF;
+    color: #fff;
+}

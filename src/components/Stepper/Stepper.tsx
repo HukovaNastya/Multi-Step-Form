@@ -10,12 +10,9 @@ type Step = {
 interface StepperProps {
    steps: Step[];
    current?: number;
-   onStepClick: (index: number) => void
 }
 
-
-// const Stepper:React.FC<StepperProps>  = ({steps, current = 0, onStepClick}) => {
-const Stepper:React.FC<StepperProps>  = ({steps, current = 0,}) => {
+const Stepper:React.FC<StepperProps>  = ({steps, current = 0}) => {
    if (steps.length === 0) {
       return <div className="text-center text-gray-500 border rounded-xl bg-gray-50 p-4">
          No steps defined
@@ -32,13 +29,13 @@ const Stepper:React.FC<StepperProps>  = ({steps, current = 0,}) => {
              const active = index === safeCurrent;
              return (
                  <div key={index} className='d-flex flex-column align-center stepper-item__wrapper'>
-                    <div className={active ? 'stepper-active__item stepper-item': 'stepper-item'}>
+                    <div className={`stepper-item ${active ? "stepper-active__item" : ""}`}>
                        <Typography variant='h4' className='text-medium-secondary form-text stepper-item-text'>
                           {index + 1}
                        </Typography>
                     </div>
                     <div className='stepper-item-label'>
-                       <Typography variant='h4' className={`${active ? "stepper-item__active-text" : "color-grey" }text-small form-text stepper-item-text`}>
+                       <Typography variant='h4' className='text-small form-text stepper-item-text'>
                           {step.label}
                        </Typography>
                     </div>
@@ -46,7 +43,6 @@ const Stepper:React.FC<StepperProps>  = ({steps, current = 0,}) => {
              )
           })}
        </div>
-
     </div>
    )
 }

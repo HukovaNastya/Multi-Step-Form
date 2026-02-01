@@ -15,6 +15,7 @@
 
 .stepper-item-text {
     text-align: center;
+    color: #C8C8D0;
     font-weight: 400;
     position: relative;
     top: 50%;
@@ -42,7 +43,10 @@
 }
 
 .stepper-active__item {
-    color: #fff;
     background-color: #B991FF;
     border: 1px solid #B991FF;
+}
+
+.stepper-active__item .stepper-item-text {
+    color: #ffffff;
 }

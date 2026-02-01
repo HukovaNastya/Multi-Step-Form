@@ -56,7 +56,7 @@ body {
 }
 
 .form-text {
-  /*color: #C8C8D0;*/
+  color: #C8C8D0;
   font-weight: 400;
   text-align: center;
 }
@@ -96,6 +96,7 @@ body {
   background-color: #D4D4D8;
 }
 
-.color-grey {
-  color: #C8C8D0;
+
+.justify-end {
+  justify-content: end;
 }
