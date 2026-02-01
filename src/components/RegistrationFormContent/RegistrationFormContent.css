@@ -28,3 +28,8 @@
     opacity: 0.4 !important;
     cursor: none !important;
 }
+
+.content {
+    padding-top: 48px;
+}
+

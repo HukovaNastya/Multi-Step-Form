@@ -3,7 +3,7 @@ import FormHeader from "../FormHeader/FormHeader.tsx";
 import RegistrationFormContent from "../RegistrationFormContent";
 
 const RegistrationForm = () => {
-    const onFormSubmit=(e) => {
+    const onFormSubmit=(e:any) => {
         e.preventDefault()
     }
     return (
