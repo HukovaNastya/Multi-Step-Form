@@ -17,7 +17,15 @@ const RegistrationFormContent = () => {
     const [step, setStep] = useState(0);
 
     const onNextClick = () => {
-        setStep(step + 1);
+        if (step < Object.entries(steps).length) {
+            setStep(step + 1);
+        }
+    }
+
+    const onPreviousClick = () => {
+        if (step > 0) {
+            setStep(step - 1);
+        }
     }
 
     return (
@@ -31,12 +39,12 @@ const RegistrationFormContent = () => {
             <ContentForFirstStep/>
             <div className='form-buttons d-flex justify-end'>
                 <div>
-                    <Button  className='form-button text-medium form-text'>
+                    <Button  className='form-button text-medium form-text' onClick={onPreviousClick}>
                         Previous
                     </Button>
                 </div>
                 <div>
-                    <Button className='form-button text-medium form-text active-button'>
+                    <Button className='form-button text-medium form-text active-button' onClick={onNextClick}>
                         Next
                     </Button>
                 </div>
