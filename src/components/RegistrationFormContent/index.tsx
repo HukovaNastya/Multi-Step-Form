@@ -39,12 +39,20 @@ const RegistrationFormContent = () => {
             <ContentForFirstStep/>
             <div className='form-buttons d-flex justify-end'>
                 <div>
-                    <Button  className='form-button text-medium form-text' onClick={onPreviousClick}>
+                    <Button
+                        className='form-button text-medium form-text'
+                        onClick={onPreviousClick}
+                        disabled={step === 0}
+                    >
                         Previous
                     </Button>
                 </div>
                 <div>
-                    <Button className='form-button text-medium form-text active-button' onClick={onNextClick}>
+                    <Button
+                        className='form-button text-medium form-text active-button'
+                        onClick={onNextClick}
+                        disabled={step === Object.entries(steps).length - 1}
+                    >
                         Next
                     </Button>
                 </div>

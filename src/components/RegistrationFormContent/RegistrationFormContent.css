@@ -22,3 +22,9 @@
     border: 1px solid #B991FF;
     color: #fff;
 }
+
+
+.form-button:disabled {
+    opacity: 0.4 !important;
+    cursor: none !important;
+}
