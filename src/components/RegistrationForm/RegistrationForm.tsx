@@ -1,5 +1,6 @@
 import Form from "../Form/Form.tsx";
 import FormHeader from "../FormHeader/FormHeader.tsx";
+import RegistrationFormContent from "../RegistrationFormContent";
 
 const RegistrationForm = () => {
     return (
@@ -8,17 +9,7 @@ const RegistrationForm = () => {
                 <div className='d-flex flex-column align-center'>
                     <FormHeader/>
                 </div>
-                <div className='form-inner-wrapper'>
-                    <div className='form-progress-bar'>
-
-                    </div>
-                    <div className='form-account-options'>
-
-                    </div>
-                    <div className='form-buttons'>
-
-                    </div>
-                </div>
+                <RegistrationFormContent/>
             </Form>
         </div>
     )

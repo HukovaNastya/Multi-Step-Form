@@ -46,6 +46,7 @@ body {
   background-color: #FFFFFF !important;
   border-radius: 8px;
   padding: 32px !important;
+  width: 480px;
 }
 
 .form-title {
@@ -75,4 +76,8 @@ body {
 
 .form-header div + div {
   padding-top: 16px;
+}
+
+.form-inner-wrapper {
+  padding-top: 40px;
 }

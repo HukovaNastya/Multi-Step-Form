@@ -1,0 +1,6 @@
+.stepper-line {
+    position: absolute;
+    background-color: #D4D4D8;
+    height: 2px;
+    width: 416px
+}
