@@ -1,6 +1,39 @@
 .stepper-line {
-    position: absolute;
     background-color: #D4D4D8;
     height: 2px;
-    width: 416px
+    width: 416px;
+    position: absolute;
+}
+
+.stepper-item {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    border: 1px solid #D4D4D8;
+    background-color: #FFFFFF;
+}
+
+.stepper-item-text {
+    text-align: center;
+    color: #C8C8D0;
+    font-weight: 400;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+
+}
+
+.stepper-item-label {
+    padding-top: 8px;
+    max-width: 96px;
+    text-wrap: wrap;
+}
+
+.stepper-item__wrapper + .stepper-item__wrapper {
+    padding-left: 32px;
+}
+
+.stepper-item__wrapper  {
+    position: relative;
+    top: -15px
 }

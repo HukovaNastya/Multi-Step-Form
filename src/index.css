@@ -31,6 +31,7 @@ body {
   flex-direction: column;
 }
 
+
 .align-center {
   align-items: center;
 }
@@ -52,22 +53,27 @@ body {
 .form-title {
   color: #27272A;
   font-weight: 600;
-  font-size: 28px;
-
 }
 
 .form-text {
-  color: #C8C8D0;
+  /*color: #C8C8D0;*/
   font-weight: 400;
   text-align: center;
 }
 
+.justify-center {
+  justify-content: center;
+}
 .text-large {
   font-size: 28px;
 }
 
 .text-medium {
   font-size: 14px;
+}
+
+.text-medium-secondary {
+  font-size: 16px;
 }
 
 .text-small {
@@ -80,4 +86,12 @@ body {
 
 .form-inner-wrapper {
   padding-top: 40px;
+}
+
+.background-purple {
+  background-color: #B991FF;
+}
+
+.background-zink {
+  background-color: #D4D4D8;
 }

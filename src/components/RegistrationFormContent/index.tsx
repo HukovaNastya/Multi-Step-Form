@@ -9,7 +9,6 @@ const RegistrationFormContent = () => {
             {label: 'Account Type'},
             {label: 'Personal Information'},
             {label: 'Profile Data'},
-            {label: 'Step Four'}
         ];
 
     }, [])
