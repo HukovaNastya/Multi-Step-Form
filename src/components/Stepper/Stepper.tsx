@@ -18,7 +18,6 @@ const Stepper:React.FC<StepperProps>  = ({steps, current = 0}) => {
          No steps defined
       </div>
    }
-   const safeCurrent = Math.min(Math.max(current, 0), steps.length - 1);
 
    return (
     <div className='stepper-container'>
@@ -26,7 +25,7 @@ const Stepper:React.FC<StepperProps>  = ({steps, current = 0}) => {
 
        <div className='d-flex justify-center'>
           {steps.map((step, index) => {
-             const active = index === safeCurrent;
+             const active = index === current;
              return (
                  <div key={index} className='d-flex flex-column align-center stepper-item__wrapper'>
                     <div className={`stepper-item ${active ? "stepper-active__item" : ""}`}>

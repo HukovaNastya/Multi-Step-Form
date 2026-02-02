@@ -1,4 +1,5 @@
 import Typography from "../Typography/Typography.tsx";
+import AccountOption from "../AccountOption/AccountOption.tsx";
 
 const ContentForFirstStep = () => {
     return (
@@ -9,7 +10,8 @@ const ContentForFirstStep = () => {
              </Typography>
           </div>
           <div className='form-account-options'>
-
+             {/*<AccountOption/>*/}
+             {/* <AccountOption/>*/}
           </div>
       </div>
     )

@@ -33,3 +33,10 @@
     padding-top: 48px;
 }
 
+.form-account-options {
+    padding-top: 10px;
+}
+
+.form-account-options .account-option-wrapper + .account-option-wrapper{
+    padding-top: 16px;
+}
