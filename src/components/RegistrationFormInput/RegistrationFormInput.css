@@ -1,0 +1,18 @@
+.registration-form-input label + input {
+    margin-top: 10px;
+}
+
+.registration-form-input {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid #F4F4F5;
+    background: #F4F4F5;
+    outline: none;
+    color: #C8C8D0;
+    font-weight: 400;
+}
+
+.registration-form-input::placeholder {
+    color: #C8C8D0;
+    opacity: 1;
+}

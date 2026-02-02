@@ -9,7 +9,6 @@ interface AccountOptionProps {
     text?:string;
 }
 
-
 const AccountOption:React.FC<AccountOptionProps> = ({title, text}) => {
     return (
         <div className='account-option-wrapper d-flex align-center'>

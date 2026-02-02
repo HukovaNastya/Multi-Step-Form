@@ -3,6 +3,8 @@ import ContentForFirstStep from "./ContentForFirstStep.tsx";
 import {useMemo, useState} from "react";
 import './RegistrationFormContent.css';
 import Button from "../Button/Button.tsx";
+import ContentForSecondStep from "./ContentForSecondStep.tsx";
+import ContentForThirdStep from "./ContentForThirdStep.tsx";
 
 const RegistrationFormContent = () => {
     const steps = useMemo(() => {
@@ -36,7 +38,9 @@ const RegistrationFormContent = () => {
                     current={step}
                 />
             </div>
-            <ContentForFirstStep/>
+            {
+                step === 0 ?  <ContentForFirstStep/> : step === 1 ? <ContentForSecondStep/> : <ContentForThirdStep/>
+            }
             <div className='form-buttons d-flex justify-end'>
                 <div>
                     <Button

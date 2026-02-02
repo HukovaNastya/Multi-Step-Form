@@ -40,3 +40,11 @@
 .form-account-options .account-option-wrapper + .account-option-wrapper{
     padding-top: 16px;
 }
+
+.content-wrapper {
+    padding-top: 60px;
+}
+
+.content-wrapper .registration-form-input-wrapper + .registration-form-input-wrapper {
+    padding-top: 32px;
+}
