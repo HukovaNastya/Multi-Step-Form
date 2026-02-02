@@ -1,6 +1,5 @@
 import Typography from "../Typography/Typography.tsx";
 import AccountOption from "../AccountOption/AccountOption.tsx";
-
 const ContentForFirstStep = () => {
     return (
       <div className="content d-flex flex-column">
@@ -10,8 +9,8 @@ const ContentForFirstStep = () => {
              </Typography>
           </div>
           <div className='form-account-options'>
-             {/*<AccountOption/>*/}
-             {/* <AccountOption/>*/}
+             <AccountOption title='Personal Account' text='Lorem ipsum dolor sit amet consectetur adipisicing elit.'/>
+             <AccountOption title='Business Account' text ='Lorem ipsum dolor sit amet consectetur adipisicing elit.'/>
           </div>
       </div>
     )

@@ -2,8 +2,24 @@
     padding: 12px;
     border: 1px solid #B991FF;
     background: transparent;
-}
-
-.account-btn-icon {
+    border-radius: 4px;
+    cursor: pointer;
     color: #B991FF;
 }
+
+.account-option-info {
+    padding-left: 16px;
+}
+
+.account-option-info div + div {
+    padding-top: 8px;
+}
+
+.account-option-btn:focus {
+    background: #B991FF;
+    color: #fff;
+}
+
+/*.account-option-btn:focus > svg {*/
+/*    color: #fff;*/
+/*}*/
