@@ -9,8 +9,8 @@ const ContentForFirstStep = () => {
              </Typography>
           </div>
           <div className='form-account-options'>
-             <AccountOption title='Personal Account' text='Lorem ipsum dolor sit amet consectetur adipisicing elit.'/>
-             <AccountOption title='Business Account' text ='Lorem ipsum dolor sit amet consectetur adipisicing elit.'/>
+             <AccountOption title='Personal Account' text='Lorem ipsum dolor sit amet consectetur adipisicing elit.'  type='personal'/>
+             <AccountOption title='Business Account' text ='Lorem ipsum dolor sit amet consectetur adipisicing elit.' type='business'/>
           </div>
       </div>
     )

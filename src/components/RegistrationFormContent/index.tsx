@@ -5,6 +5,7 @@ import './RegistrationFormContent.css';
 import Button from "../Button/Button.tsx";
 import ContentForSecondStep from "./ContentForSecondStep.tsx";
 import ContentForThirdStep from "./ContentForThirdStep.tsx";
+import {useForm} from "../../context/FormContext.tsx";
 
 const RegistrationFormContent = () => {
     const steps = useMemo(() => {
@@ -17,6 +18,7 @@ const RegistrationFormContent = () => {
     }, [])
 
     const [step, setStep] = useState(0);
+    const { accountType} = useForm();
 
     const onNextClick = () => {
         if (step < Object.entries(steps).length) {
@@ -29,6 +31,8 @@ const RegistrationFormContent = () => {
             setStep(step - 1);
         }
     }
+
+    console.log('accountType',accountType)
 
     return (
         <div className='form-inner-wrapper'>
