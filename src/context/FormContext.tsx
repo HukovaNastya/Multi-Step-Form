@@ -1,13 +1,22 @@
-import {createContext, useContext, useMemo, useState} from "react";
+import {createContext, useContext, useMemo,  useState} from "react";
 
 type FormContextValue = {
     accountType: string;
     userName: string;
     setAccountType: React.Dispatch<React.SetStateAction<string>>;
     setUserName: React.Dispatch<React.SetStateAction<string>>;
-    isUserLoading: boolean;
+    userNameRef?:any;
+    userEmail?:any;
+    setUserEmail?:any;
+    userAge?:any;
+    setUserAge?:any;
+    userInterest?:any;
+    setUserInterest?:any;
+    userDescription?:any;
+    setUserDescription?:any;
+    userPassword?:any;
+    setUserPassword?:any;
 };
-
 
 const FormContext = createContext<FormContextValue | undefined>(undefined);
 
@@ -17,57 +26,27 @@ type FormProviderProps = {
 
 
 function FormProvider({ children }: FormProviderProps) {
-    // const scenarioNameRef = useRef<HTMLInputElement | null>(null);
-    // const [isDropDownActive, setDropdownActive] = useState(false);
-    // const [isProjectNameDropDownActive, setProjectNameDropdownActive] = useState(false);
-    // const [isFunctionNameDropDownActive, setFunctionNameDropdownActive] = useState(false);
-    // const [isTestMethodDropDownActive, setTestMethodDropDownActive] = useState(false);
-    // const [isFlowExecutorsDropDownActive, setFlowExecutorsDropDownActive] = useState(false);
-    // const [isResultsStrategyDropDownActive, setResultsStrategyDropDownActive] = useState(false);
-    // const [resultsStrategyItemName, setResultsStrategyItemNameItemName] = useState("");
-    // const [flowExecutorItemName, setFlowExecutorItemNameItemName] = useState("");
-    // const [defaultVersionStrategyItemName, setDefaultVersionStrategyItemName] = useState("");
-    // const [isDefaultVersionStrategyDropDownActive, setDefaultVersionStrategyDropDownActive] = useState(false);
-    // const [functionItemName, setFunctionItemName] = useState("");
-    // const [projectItemName, setProjectItemName] = useState("");
-    // const [testMethodItemName, setTestMethodItemName] = useState("");
-    // const [testEnvironmentName, setEnvironmentName] = useState("");
-
 
     const [ accountType, setAccountType] = useState("")
     const [ userName, setUserName ] = useState("")
-    const [ isUserLoading, setIsUserLoading ] = useState(false)
-    //
-    // useEffect(() => {
-    //     setUserId(() => localStorage.getItem("userId"))
-    // }, []);
-    //
-    // useEffect(() => {
-    //     if (userId) {
-    //         setIsUserLoading(true)
-    //         getUserInfoById(userId)
-    //             .then((data) => setUser(data.user))
-    //             .catch(e => {
-    //                 console.log("e", e)
-    //             })
-    //             .finally(() => setIsUserLoading(false));
-    //     }
-    // }, [ userId ])
-    //
-    //
-    // const logout = () => {
-    //     localStorage.removeItem("token");
-    //     localStorage.removeItem("userId");
-    //     setUser(null)
-    // }
+    const [ userEmail, setUserEmail ] = useState("")
+    const [ userAge, setUserAge ] = useState(null)
+    const [ userPassword, setUserPassword ] = useState(null)
+    const [ userInterest, setUserInterest ] = useState("")
+    const [ userDescription, setUserDescription ] = useState("")
 
     const value: FormContextValue = useMemo(() => ({
         accountType,
         userName,
-        isUserLoading,
         setAccountType,
         setUserName,
-    }), [accountType, userName, setAccountType, setUserName, setIsUserLoading]);
+        userEmail,
+        setUserEmail,
+        userAge, setUserAge,
+        userInterest, setUserInterest,
+        userDescription, setUserDescription,
+        userPassword, setUserPassword
+    }), [userName, userEmail, userPassword, userAge, userInterest, userDescription, accountType]);
 
 
     return (

@@ -7,9 +7,10 @@ interface TextFieldProps {
     type?:any;
     name?:any;
     placeholder?:any;
+    onChange?:any;
 }
 
-const TextField:React.FC<TextFieldProps> = ({ innerRef, className, id, type, name, placeholder, }) => {
+const TextField:React.FC<TextFieldProps> = ({ innerRef, className, id, type, name, placeholder, onChange}) => {
     return (
         <input
             ref={innerRef}
@@ -18,6 +19,7 @@ const TextField:React.FC<TextFieldProps> = ({ innerRef, className, id, type, nam
             name={name}
             type={type}
             placeholder={ placeholder}
+            onChange={(e) => onChange(e.target.value)}
         />
     )
 }

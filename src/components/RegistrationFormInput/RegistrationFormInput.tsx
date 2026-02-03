@@ -13,9 +13,10 @@ interface RegistrationFormInputProps {
     id?:any;
     inputType?:any;
     placeholder?:any;
+    onChange?:any;
 }
 
-const RegistrationFormInput:React.FC<RegistrationFormInputProps> = ({titleText, htmlFor, innerRef, id, inputType, placeholder}) => {
+const RegistrationFormInput:React.FC<RegistrationFormInputProps> = ({titleText, htmlFor, innerRef, id, inputType, placeholder, onChange}) => {
     return (
         <div className='d-flex flex-column registration-form-input-wrapper'>
                <Label htmlFor={htmlFor} className='registration-form-label'>
@@ -30,6 +31,7 @@ const RegistrationFormInput:React.FC<RegistrationFormInputProps> = ({titleText, 
                 type={inputType}
                 name={htmlFor}
                 placeholder={placeholder}
+                onChange={onChange}
             />
         </div>
     )

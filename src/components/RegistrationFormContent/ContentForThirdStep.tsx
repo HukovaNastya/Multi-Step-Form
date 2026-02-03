@@ -1,12 +1,14 @@
 import RegistrationFormInput from "../RegistrationFormInput/RegistrationFormInput.tsx";
+import {useForm} from "../../context/FormContext.tsx";
 
 const ContentForThirdStep= () => {
+    const {setUserInterest, setUserAge, setUserDescription} = useForm();
     return (
         <div className='content-wrapper'>
             <RegistrationFormInput
                 titleText='Age'
                 htmlFor='age'
-                innerRef={null}
+                onChange={setUserAge}
                 id={3}
                 inputType='number'
                 placeholder='Age'
@@ -14,14 +16,14 @@ const ContentForThirdStep= () => {
             <RegistrationFormInput
                 titleText='Area of interest'
                 htmlFor='interest'
-                innerRef={null}
+                onChange={setUserInterest}
                 id={4}
                 inputType='interest'
                 placeholder='Area of interest'/>
             <RegistrationFormInput
                 titleText='Bio / Description'
                 htmlFor='description'
-                innerRef={null}
+                onChange={setUserDescription}
                 id={5}
                 inputType='type'
                 placeholder='Bio / Description'/>
