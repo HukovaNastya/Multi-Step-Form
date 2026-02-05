@@ -1,4 +1,5 @@
 const Local_Storage_Keys ={
+    AccountType: 'accountType',
     Name: 'name',
     Email: 'email',
     Age: 'age',
@@ -22,7 +23,7 @@ const getItem = (key:string) => {
 }
 
 const setItem = ({key, value}: {key: string; value:any;}) => {
-    if(!key || typeof key !== 'string'){
+    if(!key){
         console.warn(`The ${key} is not valid!`);
         return;
     }

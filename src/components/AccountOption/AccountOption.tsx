@@ -3,19 +3,32 @@ import Button from "../Button/Button.tsx";
 import Typography from "../Typography/Typography.tsx";
 import './AccountOption.css';
 import AccountIcon from "../../assets/icons/AccountIcon.tsx";
-import {useForm} from "../../context/FormContext.tsx";
+// import {useForm} from "../../context/OnboardingFormContext.tsx";
+// import localStorageService from '../../hooks/useStorage.tsx';
+//
+//
+// const storageKeys = localStorageService.Local_Storage_Keys;
 
 interface AccountOptionProps {
     title?:string;
     text?:string;
-    type:string;
+    accountType:string;
 }
 
-const AccountOption:React.FC<AccountOptionProps> = ({title, text,  type}) => {
-    const { setAccountType } = useForm();
+const AccountOption:React.FC<AccountOptionProps> = ({title, text, }) => {
+    // const { setAccountType } = useForm();
+    //
+    // const handleClick = (type:string) => {
+    //     setAccountType(type)
+    //     localStorageService.setItem({
+    //         key: storageKeys.AccountType,
+    //         value: type,
+    //     });
+    // }
     return (
         <div className='account-option-wrapper d-flex align-center'>
-            <Button className='account-option-btn' onClick={() => setAccountType(type)}>
+            <Button className='account-option-btn' type='button'>
+            {/*<Button className='account-option-btn' onClick={() => handleClick(accountType)} type='button'>*/}
                <AccountIcon/>
             </Button>
             <div className='account-option-info'>

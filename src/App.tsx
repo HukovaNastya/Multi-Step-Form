@@ -1,14 +1,14 @@
 import './App.css'
 import RegistrationForm from "./components/RegistrationForm/RegistrationForm.tsx";
-import {FormProvider} from "./context/FormContext.tsx";
+import {OnboardingFormProvider} from "./context/OnboardingFormContext.tsx";
 
 function App() {
 
   return (
     <div className='container'>
-        <FormProvider>
+        <OnboardingFormProvider>
             <RegistrationForm/>
-        </FormProvider>
+        </OnboardingFormProvider>
     </div>
   )
 }

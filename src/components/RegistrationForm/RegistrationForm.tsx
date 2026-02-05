@@ -2,17 +2,12 @@ import "./RegistrationForm.css"
 import Form from "../Form/Form.tsx";
 import FormHeader from "../FormHeader/FormHeader.tsx";
 import RegistrationFormContent from "../RegistrationFormContent";
-import {useForm} from "../../context/FormContext.tsx";
+// import { useForm } from "../../context/OnboardingFormContext.tsx";
 import Stepper from "../Stepper/Stepper.tsx";
 import Button from "../Button/Button.tsx";
-import {useMemo, useState} from "react";
+import { useMemo, useState } from "react";
 
 const RegistrationForm = () => {
-    const {userName, userEmail, userPassword} = useForm()
-
-    console.log(userName)
-    console.log('email', userEmail)
-    console.log('password', userPassword)
 
     const onFormSubmit=(e:any) => {
         e.preventDefault();
@@ -55,7 +50,6 @@ const RegistrationForm = () => {
                     />
                 </div>
                 <RegistrationFormContent step={step}/>
-
                 {
                     step < 2 ? (
                         <div className='form-buttons d-flex justify-end'>
