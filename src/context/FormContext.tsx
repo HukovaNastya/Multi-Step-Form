@@ -1,4 +1,4 @@
-import {createContext, useContext, useMemo,  useState} from "react";
+import {createContext, useCallback, useContext, useMemo, useState} from "react";
 
 type FormContextValue = {
     accountType: string;
@@ -18,6 +18,16 @@ type FormContextValue = {
     setUserPassword?:any;
 };
 
+// type FirstFormContextValue = {
+//   accountType: string;
+// };
+//
+// type SecondFormContextValue = {
+//   name: string;
+//   email: string;
+//   age: number;
+// };
+
 const FormContext = createContext<FormContextValue | undefined>(undefined);
 
 type FormProviderProps = {
@@ -27,10 +37,21 @@ type FormProviderProps = {
 
 function FormProvider({ children }: FormProviderProps) {
 
+    // Example
+    // const [secondForm, setSecondForm] = useState<SecondFormContextValue>({ name: "", email: "", age: 0});
+    // const updateSecondForm = useCallback((data: SecondFormContextValue) => setSecondForm(data), []);
+    //
+    // const data = useMemo(() => ({ secondForm}), [secondForm]);
+    // const api = useMemo(() => ({ updateSecondForm}), [updateSecondForm]);
+    // Example end
+
+
     const [ accountType, setAccountType] = useState("")
+
     const [ userName, setUserName ] = useState("")
     const [ userEmail, setUserEmail ] = useState("")
     const [ userAge, setUserAge ] = useState(null)
+
     const [ userPassword, setUserPassword ] = useState(null)
     const [ userInterest, setUserInterest ] = useState("")
     const [ userDescription, setUserDescription ] = useState("")
