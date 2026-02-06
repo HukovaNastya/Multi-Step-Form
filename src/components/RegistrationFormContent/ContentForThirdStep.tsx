@@ -1,14 +1,42 @@
 import RegistrationFormInput from "../RegistrationFormInput/RegistrationFormInput.tsx";
-// import {useForm} from "../../context/OnboardingFormContext.tsx";
+import {useOnboardingFormData} from "../../context/OnboardingFormContext.tsx";
+import {useEffect} from "react";
+import localStorageServise from "../../hooks/useStorage.tsx";
+
+const storageKeys = localStorageServise.Local_Storage_Keys;
 
 const ContentForThirdStep= () => {
-    // const {setUserInterest, setUserAge, setUserDescription} = useForm();
+    // @ts-ignore
+    const {secondForm} = useOnboardingFormData();
+
+    useEffect(()=> {
+        console.log('second', secondForm)
+    }, [secondForm])
+
+    const onAgeChange = (e:any) => {
+        secondForm.current.age = e.target.value;
+        localStorage.setItem(storageKeys.Age, secondForm.current.age)
+    }
+
+    const onInterestChange = (e:any) => {
+        secondForm.current.interest = e.target.value;
+        localStorage.setItem(storageKeys.Interest, secondForm.current.interest)
+    }
+    const onDescriptionChange = (e:any) => {
+        secondForm.current.interest= e.target.value;
+        localStorage.setItem(storageKeys.Interest, secondForm.current.interest)
+    }
+
+    const ageValue = localStorage.getItem(storageKeys.Age)
+    const interestValue = localStorage.getItem(storageKeys.Interest)
+    const descriptionValue = localStorage.getItem(storageKeys.Description)
     return (
         <div className='content-wrapper'>
             <RegistrationFormInput
                 titleText='Age'
                 htmlFor='age'
-                // onChange={setUserAge}
+                onChange={onAgeChange}
+                value={secondForm.age || ageValue}
                 id={3}
                 inputType='number'
                 placeholder='Age'
@@ -16,14 +44,16 @@ const ContentForThirdStep= () => {
             <RegistrationFormInput
                 titleText='Area of interest'
                 htmlFor='interest'
-                // onChange={setUserInterest}
+                onChange={onInterestChange}
+                value={secondForm.interest || interestValue}
                 id={4}
                 inputType='interest'
                 placeholder='Area of interest'/>
             <RegistrationFormInput
                 titleText='Bio / Description'
                 htmlFor='description'
-                // onChange={setUserDescription}
+                onChange={onDescriptionChange}
+                value={secondForm.description || descriptionValue}
                 id={5}
                 inputType='type'
                 placeholder='Bio / Description'/>

@@ -6,8 +6,15 @@ type FirstForm = {
     password: string | null;
 };
 
+type SecondForm = {
+    age: string;
+    interest: string;
+    description: string;
+};
+
 type FormContextValue = {
     firstForm: React.RefObject<FirstForm>;
+    secondForm: React.RefObject<SecondForm>;
 };
 
 type FormContextApi = {
@@ -33,7 +40,13 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         password: null,
     });
 
-    const data = useMemo(() => ({ accountType, firstForm }), [accountType, firstForm]);
+    const secondForm = useRef({
+        age: "",
+        interest: "",
+        description: "",
+    });
+
+    const data = useMemo(() => ({ accountType, firstForm, secondForm }), [accountType, firstForm, secondForm]);
     const api = useMemo(() => ({ open, close }), [close, open]);
 
 

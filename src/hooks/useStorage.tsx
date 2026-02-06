@@ -4,7 +4,8 @@ const Local_Storage_Keys ={
     Email: 'email',
     Age: 'age',
     Interest: 'interest',
-    Description: 'description'
+    Description: 'description',
+    Password: 'password'
 }
 
 const getItem = (key:string) => {

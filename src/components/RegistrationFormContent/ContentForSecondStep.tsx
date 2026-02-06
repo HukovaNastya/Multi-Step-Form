@@ -21,11 +21,17 @@ const ContentForSecondStep = () => {
 
     const onEmailChange = (e:any) => {
         firstForm.current.email = e.target.value;
+        localStorage.setItem(storageKeys.Email, firstForm.current.email)
     }
 
     const onPasswordChange = (e:any) => {
         firstForm.current.password = e.target.value;
+        localStorage.setItem(storageKeys.Password, firstForm.current.password)
     }
+
+    const nameValue = localStorage.getItem(storageKeys.Name)
+    const emailValue = localStorage.getItem(storageKeys.Email)
+    const passwordValue = localStorage.getItem(storageKeys.Password)
 
     return (
         <div className='content-wrapper'>
@@ -37,6 +43,7 @@ const ContentForSecondStep = () => {
                 id={1}
                 inputType='text'
                 placeholder='Name'
+                value={firstForm.name || nameValue}
             />
             <RegistrationFormInput
                 titleText='Email'
@@ -45,11 +52,14 @@ const ContentForSecondStep = () => {
                 onChange={onEmailChange}
                 id={2}
                 inputType='email'
-                placeholder='Email'/>
+                value={firstForm.email || emailValue}
+                placeholder='Email'
+            />
             <RegistrationFormInput
                 titleText='Password'
                 htmlFor='password'
                 innerRef={firstForm.password}
+                value={firstForm.password || passwordValue}
                 onChange={onPasswordChange}
                 id={3}
                 inputType='password'
