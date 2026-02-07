@@ -36,7 +36,7 @@ const ContentForThirdStep= () => {
                 titleText='Age'
                 htmlFor='age'
                 onChange={onAgeChange}
-                value={secondForm.age || ageValue}
+                value={secondForm.current.age || ageValue}
                 id={3}
                 inputType='number'
                 placeholder='Age'
@@ -45,7 +45,7 @@ const ContentForThirdStep= () => {
                 titleText='Area of interest'
                 htmlFor='interest'
                 onChange={onInterestChange}
-                value={secondForm.interest || interestValue}
+                value={secondForm.current.interest || interestValue}
                 id={4}
                 inputType='interest'
                 placeholder='Area of interest'/>
@@ -53,7 +53,7 @@ const ContentForThirdStep= () => {
                 titleText='Bio / Description'
                 htmlFor='description'
                 onChange={onDescriptionChange}
-                value={secondForm.description || descriptionValue}
+                value={secondForm.current.description || descriptionValue}
                 id={5}
                 inputType='type'
                 placeholder='Bio / Description'/>

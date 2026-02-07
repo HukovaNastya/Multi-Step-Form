@@ -2,8 +2,12 @@
     max-width: 480px;
     z-index: 1;
     border-radius: 8px;
-    padding: 32px !important;
     background-color: #F4F4F5 !important;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 32px;
 }
 
 .pop-up__overlay {
