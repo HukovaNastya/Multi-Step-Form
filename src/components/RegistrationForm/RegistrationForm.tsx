@@ -6,8 +6,11 @@ import RegistrationFormContent from "../RegistrationFormContent";
 import Stepper from "../Stepper/Stepper.tsx";
 import Button from "../Button/Button.tsx";
 import { useMemo, useState } from "react";
+// import Modal from "../Modal/Modal.tsx";
+// import Typography from "../Typography/Typography.tsx";
 
 const RegistrationForm = () => {
+    // const [isModalOpen, setModalOpen] = useState(true);
 
     const onFormSubmit=(e:any) => {
         e.preventDefault();
@@ -97,6 +100,21 @@ const RegistrationForm = () => {
                     )
                 }
             </Form>
+            {/*<Modal isActive={isModalOpen} toggleModal={setModalOpen}>*/}
+            {/*    <div className='d-flex justify-space-between'>*/}
+            {/*        <div className='d-flex '>*/}
+            {/*            <div>*/}
+            {/*                <Typography>Name:</Typography>*/}
+            {/*                <Typography>{}</Typography>*/}
+
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*        <div>*/}
+
+            {/*        </div>*/}
+
+            {/*    </div>*/}
+            {/*</Modal>*/}
         </div>
     )
 }

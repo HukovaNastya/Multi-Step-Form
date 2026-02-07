@@ -6,6 +6,10 @@ type FirstForm = {
     password: string | null;
 };
 
+type AccountType = {
+    accountType: string;
+};
+
 type SecondForm = {
     age: string;
     interest: string;
@@ -15,6 +19,7 @@ type SecondForm = {
 type FormContextValue = {
     firstForm: React.RefObject<FirstForm>;
     secondForm: React.RefObject<SecondForm>;
+    accountType: React.RefObject<AccountType>;
 };
 
 type FormContextApi = {
@@ -59,7 +64,18 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
     );
 }
 
-const useOnboardingFormData = () => useContext(OnboardingFormContextData);
+const useOnboardingFormData = () => {
+    const context = useContext(OnboardingFormContextData);
+
+    if (!context) {
+        throw new Error(
+            "useOnboardingFormData must be used within OnboardingFormProvider"
+        );
+    }
+
+    return context;
+};
+
 const useOnboardingFormApi = () => useContext(OnboardingFormContextApi);
 
 export { OnboardingFormProvider, useOnboardingFormData, useOnboardingFormApi}
