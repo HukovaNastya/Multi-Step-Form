@@ -9,13 +9,18 @@ import Modal from "../Modal/Modal.tsx";
 import Typography from "../Typography/Typography.tsx";
 
 const RegistrationForm = () => {
-    const [isModalOpen, setModalOpen] = useState(true);
+    const [isModalOpen, setModalOpen] = useState(false);
 
     const onFormSubmit = (e: any) => {
         e.preventDefault();
 
         setModalOpen(true)
     }
+
+    const onResetClick = () => {
+        setModalOpen(false)
+    }
+
     const steps = useMemo(() => {
         return [
             {id: 1, label: 'Account Type'},
@@ -104,16 +109,34 @@ const RegistrationForm = () => {
                 </Form>
             </div>
             <Modal isActive={isModalOpen} toggleModal={setModalOpen}>
-                <div className='d-flex justify-space-between'>
-                    <div className='d-flex '>
-                        <div>
-                            <Typography>Name:</Typography>
+                <div className='d-flex flex-column'>
+                    <div className='d-flex justify-space-between'>
+                            <Typography variant={"h4"}>Name:</Typography>
                             <Typography>{}</Typography>
-
-                        </div>
                     </div>
-                    <div>
+                    <div className='d-flex justify-end'>
+                       <div>
+                           <Button
+                               className='form-button text-medium form-text'
+                               onClick={onResetClick}
+                               type='button'
+                               id={6}
 
+                           >
+                               Reset
+                           </Button>
+                       </div>
+                        <div>
+                            <Button
+                                className='form-button text-medium form-text active-button'
+                                // onClick={}
+                                type='button'
+                                id={7}
+
+                            >
+                                Sent
+                            </Button>
+                        </div>
                     </div>
 
                 </div>

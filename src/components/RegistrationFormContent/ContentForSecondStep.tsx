@@ -26,7 +26,9 @@ const ContentForSecondStep = () => {
 
     const onPasswordChange = (e:any) => {
         firstForm.current.password = e.target.value;
-        localStorage.setItem(storageKeys.Password, firstForm.current.password)
+        if (firstForm.current.password != null) {
+            localStorage.setItem(storageKeys.Password, firstForm.current.password)
+        }
     }
 
     const nameValue = localStorage.getItem(storageKeys.Name)
@@ -38,28 +40,28 @@ const ContentForSecondStep = () => {
             <RegistrationFormInput
                 titleText='Name'
                 htmlFor='name'
-                innerRef={firstForm.name}
+                // innerRef={firstForm.name}
                 onChange={onNameChange}
                 id={1}
                 inputType='text'
                 placeholder='Name'
-                value={firstForm.name || nameValue}
+                value={firstForm.current.name || nameValue}
             />
             <RegistrationFormInput
                 titleText='Email'
                 htmlFor='email'
-                innerRef={firstForm.email}
+                // innerRef={firstForm.current.email}
                 onChange={onEmailChange}
                 id={2}
                 inputType='email'
-                value={firstForm.email || emailValue}
+                value={firstForm.current.email || emailValue}
                 placeholder='Email'
             />
             <RegistrationFormInput
                 titleText='Password'
                 htmlFor='password'
-                innerRef={firstForm.password}
-                value={firstForm.password || passwordValue}
+                // innerRef={firstForm.current.password}
+                value={firstForm.current.password || passwordValue}
                 onChange={onPasswordChange}
                 id={3}
                 inputType='password'

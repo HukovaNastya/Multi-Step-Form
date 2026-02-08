@@ -12,23 +12,26 @@ interface AccountOptionProps {
     title?:string;
     text?:string;
     account:string;
+    active?:boolean;
+    onSelect:(value:string) => void;
 }
 
-const AccountOption:React.FC<AccountOptionProps> = ({title, text, account}) => {
-    const {accountType} = useOnboardingFormData()
+const AccountOption:React.FC<AccountOptionProps> = ({title, text, account, active, onSelect}) => {
+    const {accountType} = useOnboardingFormData();
 
     const handleClick = (type:string) => {
         if (!accountType.current) return;
-
         accountType.current.accountType = type;
         localStorageService.setItem({
             key: storageKeys.AccountType,
             value: type,
         });
+        onSelect(type);
     }
+
     return (
         <div className='account-option-wrapper d-flex align-center'>
-            <Button className='account-option-btn' type='button' onClick={() => handleClick(account)}>
+            <Button className={`account-option-btn ${active ? 'active' : ''}`} type='button' onClick={() => handleClick(account)}>
                <AccountIcon/>
             </Button>
             <div className='account-option-info'>

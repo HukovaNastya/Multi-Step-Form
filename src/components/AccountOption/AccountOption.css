@@ -15,7 +15,7 @@
     padding-top: 8px;
 }
 
-.account-option-btn:focus {
+.account-option-btn.active {
     background: #B991FF;
     color: #fff;
 }
