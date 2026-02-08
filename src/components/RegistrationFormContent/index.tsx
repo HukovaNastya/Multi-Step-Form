@@ -6,16 +6,17 @@ type RegistrationFormContentProps = {
     step: number;
     onTriggerNext: () => void;
     onTriggerPrev: () => void;
+    onTriggerSubmit: () => void;
 }
 
-const RegistrationFormContent = ({ step, onTriggerNext, onTriggerPrev }: RegistrationFormContentProps) => {
+const RegistrationFormContent = ({ step, onTriggerNext, onTriggerPrev, onTriggerSubmit }: RegistrationFormContentProps) => {
     return (
         <div className='form-inner-wrapper'>
             {
                 step === 0 ?
                     <ContentForFirstStep onTriggerNext={onTriggerNext}/> :
                     step === 1 ? <ContentForSecondStep onTriggerNext={onTriggerNext} onTriggerPrevious={onTriggerPrev}/> :
-                        <ContentForThirdStep/>
+                        <ContentForThirdStep onTriggerPrevious={onTriggerPrev} onTriggerSubmit={onTriggerSubmit}/>
             }
         </div>
     )

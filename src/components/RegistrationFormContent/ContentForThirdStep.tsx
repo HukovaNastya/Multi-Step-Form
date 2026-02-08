@@ -1,34 +1,29 @@
 import RegistrationFormInput from "../RegistrationFormInput/RegistrationFormInput.tsx";
-import {useOnboardingFormData} from "../../context/OnboardingFormContext.tsx";
-// import {useEffect} from "react";
-// import localStorageServise from "../../hooks/useStorage.tsx";
+import {useOnboardingFormApi, useOnboardingFormData} from "../../context/OnboardingFormContext.tsx";
+import Button from "../Button/Button.tsx";
+import type {ChangeEvent} from "react";
 
-// const storageKeys = localStorageServise.Local_Storage_Keys;
+type ContentForThirdStepProps = {
+    onTriggerSubmit: () => void;
+    onTriggerPrevious: () => void;
+}
 
-const ContentForThirdStep= () => {
+
+const ContentForThirdStep= (props: ContentForThirdStepProps) => {
     const {secondForm} = useOnboardingFormData();
+    const { updateSecondFormField } = useOnboardingFormApi()
 
-    // useEffect(()=> {
-    //     console.log('second', secondForm)
-    // }, [secondForm])
-
-    const onAgeChange = (e:any) => {
-        // secondForm.current.age = e.target.value;
-        // localStorage.setItem(storageKeys.Age, secondForm.current.age)
+    const onAgeChange = (e: ChangeEvent<HTMLInputElement>) => {
+        updateSecondFormField("age", e.target.value)
     }
 
-    const onInterestChange = (e:any) => {
-        // secondForm.current.interest = e.target.value;
-        // localStorage.setItem(storageKeys.Interest, secondForm.current.interest)
+    const onInterestChange = (e: ChangeEvent<HTMLInputElement>) => {
+        updateSecondFormField("interest", e.target.value)
     }
-    const onDescriptionChange = (e:any) => {
-        // secondForm.current.interest= e.target.value;
-        // localStorage.setItem(storageKeys.Interest, secondForm.current.interest)
+
+    const onDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+        updateSecondFormField("description", e.target.value)
     }
-    //
-    // const ageValue = localStorage.getItem(storageKeys.Age)
-    // const interestValue = localStorage.getItem(storageKeys.Interest)
-    // const descriptionValue = localStorage.getItem(storageKeys.Description)
     return (
         <div className='content-wrapper'>
             <RegistrationFormInput
@@ -56,6 +51,26 @@ const ContentForThirdStep= () => {
                 id={5}
                 inputType='type'
                 placeholder='Bio / Description'/>
+            <div className='form-buttons d-flex justify-end'>
+                <div>
+                    <Button
+                        className='form-button text-medium form-text'
+                        onClick={() => {props.onTriggerPrevious()}}
+                        type='button'
+                    >
+                        Previous
+                    </Button>
+                </div>
+                <div>
+                    <Button
+                        className='form-button text-medium form-text active-button'
+                        onClick={() =>{props.onTriggerSubmit()}}
+                        type='button'
+                    >
+                        Submit
+                    </Button>
+                </div>
+            </div>
         </div>
     )
 }

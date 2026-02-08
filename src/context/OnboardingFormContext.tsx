@@ -26,6 +26,7 @@ type FormContextValue = {
 type FormContextApi = {
     setAccountTypeValue: (type: string) => void;
     updateFirstFormField: (field: keyof FirstForm, value: string) => void;
+    updateSecondFormField: (field: keyof SecondForm, value: string) => void;
 }
 
 const OnboardingFormContextData = createContext<FormContextValue>({
@@ -46,7 +47,8 @@ const OnboardingFormContextData = createContext<FormContextValue>({
 
 const OnboardingFormContextApi = createContext<FormContextApi>({
     setAccountTypeValue: () => {},
-    updateFirstFormField: () => {}
+    updateFirstFormField: () => {},
+    updateSecondFormField: () => {}
 });
 
 type FormProviderProps = {
@@ -84,8 +86,21 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         })
     }, []);
 
+    const updateSecondFormField = useCallback((field: keyof SecondForm, value: string) => {
+        setSecondForm(prevState => {
+            const newState = {...prevState, [field]: value}
+            localStorage.setItem(storageKeys.SecondForm, JSON.stringify(newState))
+            return newState
+        })
+    }, []);
+
     const data = useMemo(() => ({ accountType, firstForm, secondForm }), [accountType, firstForm, secondForm]);
-    const api = useMemo(() => ({ setAccountTypeValue, updateFirstFormField }), [setAccountTypeValue, updateFirstFormField]);
+    const api = useMemo(() => ({
+        setAccountTypeValue,
+        updateFirstFormField,
+        updateSecondFormField
+    }),
+        [setAccountTypeValue, updateFirstFormField,  updateSecondFormField]);
 
 
     return (

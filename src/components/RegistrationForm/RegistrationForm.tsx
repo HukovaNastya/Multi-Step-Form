@@ -70,6 +70,10 @@ const RegistrationForm = () => {
         }
     }
 
+    const onSubmitClick = () => {
+        setModalOpen(true);
+    }
+
     const onSentClick= async() => {
         try {
             // const name = firstForm.current.name;
@@ -109,6 +113,7 @@ const RegistrationForm = () => {
                         step={step}
                         onTriggerNext={onNextClick}
                         onTriggerPrev={onPreviousClick}
+                        onTriggerSubmit={onSubmitClick}
                     />
                     {/*{*/}
                     {/*    step < 2 ? (*/}
@@ -212,6 +217,11 @@ const RegistrationForm = () => {
             {/*        )*/}
             {/*    }*/}
             {/*</Modal>*/}
+            {isModalOpen ? (
+                <Modal isActive={isModalOpen} toggleModal={setModalOpen}>
+                    <h1>Hello World</h1>
+                </Modal>
+            ): null}
         </div>
     )
 }
