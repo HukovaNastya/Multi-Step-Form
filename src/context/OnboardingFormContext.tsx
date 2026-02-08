@@ -3,7 +3,7 @@ import {createContext, useContext, useMemo, useRef} from "react";
 type FirstForm = {
     name: string;
     email: string;
-    password: string | null;
+    password: string;
 };
 
 type AccountType = {

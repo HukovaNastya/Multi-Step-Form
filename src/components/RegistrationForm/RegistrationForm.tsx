@@ -7,18 +7,43 @@ import Button from "../Button/Button.tsx";
 import {useMemo, useState} from "react";
 import Modal from "../Modal/Modal.tsx";
 import Typography from "../Typography/Typography.tsx";
+import {createUser} from "../../services/onboardingForm.services.ts";
+import {useOnboardingFormData} from "../../context/OnboardingFormContext.tsx";
+import localStorageServise from "../../hooks/useStorage.tsx";
+
+const storageKeys = localStorageServise.Local_Storage_Keys;
 
 const RegistrationForm = () => {
+    const {accountType, firstForm, secondForm} = useOnboardingFormData();
     const [isModalOpen, setModalOpen] = useState(false);
+    const [userCreated, setUserCReated] = useState(false);
+    const [isLooading, setIsLoading] = useState(false);
 
     const onFormSubmit = (e: any) => {
         e.preventDefault();
-
-        setModalOpen(true)
+        setModalOpen(true);
     }
 
     const onResetClick = () => {
-        setModalOpen(false)
+        setModalOpen(false);
+        firstForm.current.name = "";
+        secondForm.current.age = "";
+        firstForm.current.email ="";
+        accountType.current.accountType = "";
+        firstForm.current.password = "";
+        secondForm.current.interest= "";
+        secondForm.current.description="";
+        localStorage.setItem(storageKeys.Name, firstForm.current.name)
+        localStorage.setItem(storageKeys.Age, secondForm.current.age)
+        localStorage.setItem(storageKeys.Email, firstForm.current.email)
+        localStorage.setItem(storageKeys.AccountType, accountType.current.accountType)
+        localStorage.setItem(storageKeys.Password, firstForm.current.password)
+        localStorage.setItem(storageKeys.Interest, secondForm.current.interest)
+        localStorage.setItem(storageKeys.Description, secondForm.current.description)
+        setIsLoading(true)
+        setModalOpen(false);
+        setIsLoading(false)
+
     }
 
     const steps = useMemo(() => {
@@ -44,6 +69,29 @@ const RegistrationForm = () => {
             setStep(step - 1);
         }
     }
+
+    const onSentClick= async() => {
+        try {
+            const name = firstForm.current.name;
+            const age = parseFloat(secondForm.current.age);
+            const email = firstForm.current.email;
+            const account= accountType.current.accountType;
+            const password = firstForm.current.password;
+            const interests = secondForm.current.interest;
+            const description = secondForm.current.description;
+
+            await createUser( { name, age, email, accountType: account, password, interests, description })
+            setUserCReated(true);
+            setModalOpen(false);
+        } catch (e) {
+            console.error(e)
+            setUserCReated(false);
+            setModalOpen(false);
+        }
+
+    }
+
+     {isLooading ?  <div>Loading...</div> : null}
 
 
     return (
@@ -109,37 +157,56 @@ const RegistrationForm = () => {
                 </Form>
             </div>
             <Modal isActive={isModalOpen} toggleModal={setModalOpen}>
-                <div className='d-flex flex-column'>
-                    <div className='d-flex justify-space-between'>
-                            <Typography variant={"h4"}>Name:</Typography>
-                            <Typography>{}</Typography>
-                    </div>
-                    <div className='d-flex justify-end'>
-                       <div>
-                           <Button
-                               className='form-button text-medium form-text'
-                               onClick={onResetClick}
-                               type='button'
-                               id={6}
+                {
+                    !userCreated && (
+                        <div className='d-flex flex-column'>
+                            <div>
+                                <div className='d-flex justify-space-between align-center'>
+                                    <Typography variant={"h4"}>Name:</Typography>
+                                    <Typography variant={"h4"}>{firstForm.current.name}</Typography>
+                                </div>
+                                <div className='d-flex justify-space-between align-center'>
+                                    <Typography variant={"h4"}>Age:</Typography>
+                                    <Typography variant={"h4"}>{secondForm.current.age}</Typography>
+                                </div>
+                                <div className='d-flex justify-space-between align-center'>
+                                    <Typography variant={"h4"}>Age:</Typography>
+                                    <Typography variant={"h4"}>{secondForm.current.age}</Typography>
+                                </div>
+                            </div>
+                            <div className='d-flex justify-end'>
+                                <div>
+                                    <Button
+                                        className='form-button text-medium form-text'
+                                        onClick={onResetClick}
+                                        type='button'
+                                        id={6}
 
-                           >
-                               Reset
-                           </Button>
-                       </div>
-                        <div>
-                            <Button
-                                className='form-button text-medium form-text active-button'
-                                // onClick={}
-                                type='button'
-                                id={7}
+                                    >
+                                        Reset
+                                    </Button>
+                                </div>
+                                <div>
+                                    <Button
+                                        className='form-button text-medium form-text active-button'
+                                        onClick={onSentClick}
+                                        type='button'
+                                        id={7}
 
-                            >
-                                Sent
-                            </Button>
+                                    >
+                                        Sent
+                                    </Button>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
-
-                </div>
+                    )
+                }
+                {
+                    userCreated && (
+                        <Typography variant={"h4"}>User was created!!!</Typography>
+                    )
+                }
             </Modal>
         </div>
     )
