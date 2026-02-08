@@ -1,4 +1,5 @@
-import {createContext, useContext, useMemo, useRef} from "react";
+import {createContext, useCallback, useContext, useMemo, useState} from "react";
+import localStorageService from "../hooks/useStorage.tsx";
 
 type FirstForm = {
     name: string;
@@ -7,7 +8,7 @@ type FirstForm = {
 };
 
 type AccountType = {
-    accountType: string;
+    type: string;
 };
 
 type SecondForm = {
@@ -17,42 +18,74 @@ type SecondForm = {
 };
 
 type FormContextValue = {
-    firstForm: React.RefObject<FirstForm>;
-    secondForm: React.RefObject<SecondForm>;
-    accountType: React.RefObject<AccountType>;
+    firstForm: FirstForm;
+    secondForm: SecondForm;
+    accountType: AccountType;
 };
 
 type FormContextApi = {
-
+    setAccountTypeValue: (type: string) => void;
+    updateFirstFormField: (field: keyof FirstForm, value: string) => void;
 }
 
-const OnboardingFormContextData = createContext<FormContextValue | undefined>(undefined);
-const OnboardingFormContextApi = createContext<FormContextApi| undefined>(undefined);
+const OnboardingFormContextData = createContext<FormContextValue>({
+    firstForm: {
+        name: "",
+        email: "",
+        password: ""
+    },
+    secondForm: {
+        age: "",
+        interest: "",
+        description: "",
+    },
+    accountType: {
+        type: "personal"
+    },
+});
+
+const OnboardingFormContextApi = createContext<FormContextApi>({
+    setAccountTypeValue: () => {},
+    updateFirstFormField: () => {}
+});
 
 type FormProviderProps = {
     children: React.ReactNode;
 };
 
+const storageKeys = localStorageService.Local_Storage_Keys;
 
 function OnboardingFormProvider({ children }: FormProviderProps) {
-    const accountType = useRef({
-        accountType: "",
+    const [accountType, setAccountType] = useState<AccountType>({
+        type: localStorage.getItem(storageKeys.AccountType) || "personal",
     });
 
-    const firstForm = useRef({
-        name: "",
-        email: "",
-        password: null,
+    const [firstForm, setFirstForm] = useState<FirstForm>(() => {
+        const storedForm = localStorage.getItem(storageKeys.FirstForm);
+        return storedForm ? JSON.parse(storedForm) : { name: "", email: "", password: "" };
     });
 
-    const secondForm = useRef({
+    const [secondForm, setSecondForm] = useState<SecondForm>({
         age: "",
         interest: "",
         description: "",
     });
 
+    const setAccountTypeValue = useCallback((type: string) => {
+        setAccountType({ type });
+        localStorage.setItem(storageKeys.AccountType, type);
+    }, [])
+
+    const updateFirstFormField = useCallback((field: keyof FirstForm, value: string) => {
+        setFirstForm(prevState => {
+            const newState = {...prevState, [field]: value}
+            localStorage.setItem(storageKeys.FirstForm, JSON.stringify(newState))
+            return newState
+        })
+    }, []);
+
     const data = useMemo(() => ({ accountType, firstForm, secondForm }), [accountType, firstForm, secondForm]);
-    const api = useMemo(() => ({ open, close }), [close, open]);
+    const api = useMemo(() => ({ setAccountTypeValue, updateFirstFormField }), [setAccountTypeValue, updateFirstFormField]);
 
 
     return (
@@ -64,18 +97,8 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
     );
 }
 
-const useOnboardingFormData = () => {
-    const context = useContext(OnboardingFormContextData);
-
-    if (!context) {
-        throw new Error(
-            "useOnboardingFormData must be used within OnboardingFormProvider"
-        );
-    }
-
-    return context;
-};
-
+const useOnboardingFormData = () => useContext(OnboardingFormContextData)
 const useOnboardingFormApi = () => useContext(OnboardingFormContextApi);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export { OnboardingFormProvider, useOnboardingFormData, useOnboardingFormApi}

@@ -25,24 +25,24 @@ const RegistrationForm = () => {
     }
 
     const onResetClick = () => {
-        setModalOpen(false);
-        firstForm.current.name = "";
-        secondForm.current.age = "";
-        firstForm.current.email ="";
-        accountType.current.accountType = "";
-        firstForm.current.password = "";
-        secondForm.current.interest= "";
-        secondForm.current.description="";
-        localStorage.setItem(storageKeys.Name, firstForm.current.name)
-        localStorage.setItem(storageKeys.Age, secondForm.current.age)
-        localStorage.setItem(storageKeys.Email, firstForm.current.email)
-        localStorage.setItem(storageKeys.AccountType, accountType.current.accountType)
-        localStorage.setItem(storageKeys.Password, firstForm.current.password)
-        localStorage.setItem(storageKeys.Interest, secondForm.current.interest)
-        localStorage.setItem(storageKeys.Description, secondForm.current.description)
-        setIsLoading(true)
-        setModalOpen(false);
-        setIsLoading(false)
+        // setModalOpen(false);
+        // firstForm.current.name = "";
+        // secondForm.current.age = "";
+        // firstForm.current.email ="";
+        // accountType.current.accountType = "";
+        // firstForm.current.password = "";
+        // secondForm.current.interest= "";
+        // secondForm.current.description="";
+        // localStorage.setItem(storageKeys.Name, firstForm.current.name)
+        // localStorage.setItem(storageKeys.Age, secondForm.current.age)
+        // localStorage.setItem(storageKeys.Email, firstForm.current.email)
+        // localStorage.setItem(storageKeys.AccountType, accountType.current.accountType)
+        // localStorage.setItem(storageKeys.Password, firstForm.current.password)
+        // localStorage.setItem(storageKeys.Interest, secondForm.current.interest)
+        // localStorage.setItem(storageKeys.Description, secondForm.current.description)
+        // setIsLoading(true)
+        // setModalOpen(false);
+        // setIsLoading(false)
 
     }
 
@@ -72,15 +72,15 @@ const RegistrationForm = () => {
 
     const onSentClick= async() => {
         try {
-            const name = firstForm.current.name;
-            const age = parseFloat(secondForm.current.age);
-            const email = firstForm.current.email;
-            const account= accountType.current.accountType;
-            const password = firstForm.current.password;
-            const interests = secondForm.current.interest;
-            const description = secondForm.current.description;
-
-            await createUser( { name, age, email, accountType: account, password, interests, description })
+            // const name = firstForm.current.name;
+            // const age = parseFloat(secondForm.current.age);
+            // const email = firstForm.current.email;
+            // const account= accountType.current.accountType;
+            // const password = firstForm.current.password;
+            // const interests = secondForm.current.interest;
+            // const description = secondForm.current.description;
+            //
+            // await createUser( { name, age, email, accountType: account, password, interests, description })
             setUserCReated(true);
             setModalOpen(false);
         } catch (e) {
@@ -105,109 +105,113 @@ const RegistrationForm = () => {
                             current={step}
                         />
                     </div>
-                    <RegistrationFormContent step={step}/>
-                    {
-                        step < 2 ? (
-                            <div className='form-buttons d-flex justify-end'>
-                                <div>
-                                    <Button
-                                        className='form-button text-medium form-text'
-                                        onClick={onPreviousClick}
-                                        disabled={step === 0}
-                                        type='button'
-                                        id={1}
-                                    >
-                                        Previous
-                                    </Button>
-                                </div>
-                                <div>
-                                    <Button
-                                        className='form-button text-medium form-text active-button'
-                                        onClick={onNextClick}
-                                        type='button'
-                                        disabled={false}
-                                        id={2}
-                                    >
-                                        Next
-                                    </Button>
-                                </div>
-                            </div>
-                        ) : (
-                            <div className='form-buttons d-flex justify-end'>
-                                <div>
-                                    <Button
-                                        className='form-button text-medium form-text'
-                                        onClick={onPreviousClick}
-                                        disabled={step === 0}
-                                        type='button'
-                                        id={3}
+                    <RegistrationFormContent
+                        step={step}
+                        onTriggerNext={onNextClick}
+                        onTriggerPrev={onPreviousClick}
+                    />
+                    {/*{*/}
+                    {/*    step < 2 ? (*/}
+                    {/*        <div className='form-buttons d-flex justify-end'>*/}
+                    {/*            <div>*/}
+                    {/*                <Button*/}
+                    {/*                    className='form-button text-medium form-text'*/}
+                    {/*                    onClick={onPreviousClick}*/}
+                    {/*                    disabled={step === 0}*/}
+                    {/*                    type='button'*/}
+                    {/*                    id={1}*/}
+                    {/*                >*/}
+                    {/*                    Previous*/}
+                    {/*                </Button>*/}
+                    {/*            </div>*/}
+                    {/*            <div>*/}
+                    {/*                <Button*/}
+                    {/*                    className='form-button text-medium form-text active-button'*/}
+                    {/*                    onClick={onNextClick}*/}
+                    {/*                    type='button'*/}
+                    {/*                    disabled={false}*/}
+                    {/*                    id={2}*/}
+                    {/*                >*/}
+                    {/*                    Next*/}
+                    {/*                </Button>*/}
+                    {/*            </div>*/}
+                    {/*        </div>*/}
+                    {/*    ) : (*/}
+                    {/*        <div className='form-buttons d-flex justify-end'>*/}
+                    {/*            <div>*/}
+                    {/*                <Button*/}
+                    {/*                    className='form-button text-medium form-text'*/}
+                    {/*                    onClick={onPreviousClick}*/}
+                    {/*                    disabled={step === 0}*/}
+                    {/*                    type='button'*/}
+                    {/*                    id={3}*/}
 
-                                    >
-                                        Previous
-                                    </Button>
-                                </div>
-                                <div>
-                                    <button type='submit'
-                                            className='form-button text-medium form-text active-button'>Submit
-                                    </button>
-                                </div>
-                            </div>
-                        )
-                    }
+                    {/*                >*/}
+                    {/*                    Previous*/}
+                    {/*                </Button>*/}
+                    {/*            </div>*/}
+                    {/*            <div>*/}
+                    {/*                <button type='submit'*/}
+                    {/*                        className='form-button text-medium form-text active-button'>Submit*/}
+                    {/*                </button>*/}
+                    {/*            </div>*/}
+                    {/*        </div>*/}
+                    {/*    )*/}
+                    {/*}*/}
                 </Form>
             </div>
-            <Modal isActive={isModalOpen} toggleModal={setModalOpen}>
-                {
-                    !userCreated && (
-                        <div className='d-flex flex-column'>
-                            <div>
-                                <div className='d-flex justify-space-between align-center'>
-                                    <Typography variant={"h4"}>Name:</Typography>
-                                    <Typography variant={"h4"}>{firstForm.current.name}</Typography>
-                                </div>
-                                <div className='d-flex justify-space-between align-center'>
-                                    <Typography variant={"h4"}>Age:</Typography>
-                                    <Typography variant={"h4"}>{secondForm.current.age}</Typography>
-                                </div>
-                                <div className='d-flex justify-space-between align-center'>
-                                    <Typography variant={"h4"}>Age:</Typography>
-                                    <Typography variant={"h4"}>{secondForm.current.age}</Typography>
-                                </div>
-                            </div>
-                            <div className='d-flex justify-end'>
-                                <div>
-                                    <Button
-                                        className='form-button text-medium form-text'
-                                        onClick={onResetClick}
-                                        type='button'
-                                        id={6}
+            {/*<Modal isActive={isModalOpen} toggleModal={setModalOpen}>*/}
+            {/*    {*/}
+            {/*        !userCreated && (*/}
+            {/*            <div className='d-flex flex-column'>*/}
+            {/*                <div>*/}
+            {/*                    <div className='d-flex justify-space-between align-center'>*/}
+            {/*                        <Typography variant={"h4"}>Name:</Typography>*/}
+            {/*                        <Typography variant={"h4"}>{firstForm.current.name}</Typography>*/}
+            {/*                    </div>*/}
+            {/*                    <div className='d-flex justify-space-between align-center'>*/}
+            {/*                        <Typography variant={"h4"}>Age:</Typography>*/}
+            {/*                        <Typography variant={"h4"}>{secondForm.current.age}</Typography>*/}
+            {/*                    </div>*/}
+            {/*                    <div className='d-flex justify-space-between align-center'>*/}
+            {/*                        <Typography variant={"h4"}>Age:</Typography>*/}
+            {/*                        <Typography variant={"h4"}>{secondForm.current.age}</Typography>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*                <div className='d-flex justify-end'>*/}
+            {/*                    <div>*/}
+            {/*                        <Button*/}
+            {/*                            className='form-button text-medium form-text'*/}
+            {/*                            onClick={onResetClick}*/}
+            {/*                            type='button'*/}
+            {/*                            id={6}*/}
 
-                                    >
-                                        Reset
-                                    </Button>
-                                </div>
-                                <div>
-                                    <Button
-                                        className='form-button text-medium form-text active-button'
-                                        onClick={onSentClick}
-                                        type='button'
-                                        id={7}
+            {/*                        >*/}
+            {/*                            Reset*/}
+            {/*                        </Button>*/}
+            {/*                    </div>*/}
+            {/*                    <div>*/}
+            {/*                        <Button*/}
+            {/*                            className='form-button text-medium form-text active-button'*/}
+            {/*                            onClick={onSentClick}*/}
+            {/*                            type='button'*/}
+            {/*                            id={7}*/}
 
-                                    >
-                                        Sent
-                                    </Button>
-                                </div>
-                            </div>
+            {/*                        >*/}
+            {/*                            Sent*/}
+            {/*                        </Button>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
 
-                        </div>
-                    )
-                }
-                {
-                    userCreated && (
-                        <Typography variant={"h4"}>User was created!!!</Typography>
-                    )
-                }
-            </Modal>
+            {/*            </div>*/}
+            {/*        )*/}
+            {/*    }*/}
+            {/*    {*/}
+            {/*        userCreated && (*/}
+            {/*            <Typography variant={"h4"}>User was created!!!</Typography>*/}
+            {/*        )*/}
+            {/*    }*/}
+            {/*</Modal>*/}
         </div>
     )
 }

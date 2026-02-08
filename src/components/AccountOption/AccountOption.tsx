@@ -3,35 +3,22 @@ import Button from "../Button/Button.tsx";
 import Typography from "../Typography/Typography.tsx";
 import './AccountOption.css';
 import AccountIcon from "../../assets/icons/AccountIcon.tsx";
-import {useOnboardingFormData} from "../../context/OnboardingFormContext.tsx";
-import localStorageService from '../../hooks/useStorage.tsx';
-
-const storageKeys = localStorageService.Local_Storage_Keys;
 
 interface AccountOptionProps {
-    title?:string;
-    text?:string;
-    account:string;
-    active?:boolean;
-    onSelect:(value:string) => void;
+    title:string;
+    text:string;
+    active:boolean;
+    onSelect:() => void;
 }
 
-const AccountOption:React.FC<AccountOptionProps> = ({title, text, account, active, onSelect}) => {
-    const {accountType} = useOnboardingFormData();
-
-    const handleClick = (type:string) => {
-        if (!accountType.current) return;
-        accountType.current.accountType = type;
-        localStorageService.setItem({
-            key: storageKeys.AccountType,
-            value: type,
-        });
-        onSelect(type);
+const AccountOption:React.FC<AccountOptionProps> = ({title, text, active, onSelect}) => {
+    const handleClick = () => {
+        onSelect();
     }
 
     return (
         <div className='account-option-wrapper d-flex align-center'>
-            <Button className={`account-option-btn ${active ? 'active' : ''}`} type='button' onClick={() => handleClick(account)}>
+            <Button className={`account-option-btn ${active ? 'active' : ''}`} type='button' onClick={() => handleClick()}>
                <AccountIcon/>
             </Button>
             <div className='account-option-info'>
@@ -48,7 +35,6 @@ const AccountOption:React.FC<AccountOptionProps> = ({title, text, account, activ
             </div>
         </div>
     )
-
 }
 
 export default AccountOption;

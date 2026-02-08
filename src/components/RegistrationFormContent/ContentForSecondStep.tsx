@@ -1,71 +1,76 @@
 import RegistrationFormInput from "../RegistrationFormInput/RegistrationFormInput.tsx";
-import {useOnboardingFormData} from "../../context/OnboardingFormContext.tsx";
-import {useEffect} from "react";
-import localStorageServise from "../../hooks/useStorage.tsx";
+import {useOnboardingFormApi, useOnboardingFormData} from "../../context/OnboardingFormContext.tsx";
+import Button from "../Button/Button.tsx";
+import { debounce } from '../../utils/debounce.ts'
+import type {ChangeEvent} from "react";
 
-const storageKeys = localStorageServise.Local_Storage_Keys;
+type ContentForSecondStepProps = {
+    onTriggerNext: () => void;
+    onTriggerPrevious: () => void;
+}
 
+const ContentForSecondStep = (props: ContentForSecondStepProps) => {
+    const { firstForm } = useOnboardingFormData();
+    const { updateFirstFormField } = useOnboardingFormApi()
 
-const ContentForSecondStep = () => {
-    // @ts-ignore
-    const {firstForm} = useOnboardingFormData();
-
-    useEffect(()=> {
-        console.log('first', firstForm)
-    }, [firstForm.current.name])
-
-    const onNameChange = (e:any) => {
-            firstForm.current.name = e.target.value;
-            localStorage.setItem(storageKeys.Name, firstForm.current.name)
+    const onNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+        updateFirstFormField("name", e.target.value)
     }
 
-    const onEmailChange = (e:any) => {
-        firstForm.current.email = e.target.value;
-        localStorage.setItem(storageKeys.Email, firstForm.current.email)
+    const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+        updateFirstFormField("email", e.target.value)
     }
 
-    const onPasswordChange = (e:any) => {
-        firstForm.current.password = e.target.value;
-        if (firstForm.current.password != null) {
-            localStorage.setItem(storageKeys.Password, firstForm.current.password)
-        }
+    const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+        updateFirstFormField("password", e.target.value)
     }
-
-    const nameValue = localStorage.getItem(storageKeys.Name)
-    const emailValue = localStorage.getItem(storageKeys.Email)
-    const passwordValue = localStorage.getItem(storageKeys.Password)
 
     return (
         <div className='content-wrapper'>
             <RegistrationFormInput
                 titleText='Name'
                 htmlFor='name'
-                // innerRef={firstForm.name}
-                onChange={onNameChange}
-                id={1}
+                onChange={debounce(onNameChange, 500)}
                 inputType='text'
                 placeholder='Name'
-                value={firstForm.current.name || nameValue}
+                value={firstForm.name}
             />
             <RegistrationFormInput
                 titleText='Email'
                 htmlFor='email'
-                // innerRef={firstForm.current.email}
-                onChange={onEmailChange}
-                id={2}
+                onChange={debounce(onEmailChange, 500)}
                 inputType='email'
-                value={firstForm.current.email || emailValue}
+                value={firstForm.email}
                 placeholder='Email'
             />
             <RegistrationFormInput
                 titleText='Password'
                 htmlFor='password'
-                // innerRef={firstForm.current.password}
-                value={firstForm.current.password || passwordValue}
-                onChange={onPasswordChange}
-                id={3}
+                value={firstForm.password}
+                onChange={debounce(onPasswordChange, 500)}
                 inputType='password'
                 placeholder='Password'/>
+
+                <div className='form-buttons d-flex justify-end'>
+                    <div>
+                        <Button
+                            className='form-button text-medium form-text'
+                            onClick={() => {props.onTriggerPrevious()}}
+                            type='button'
+                        >
+                            Previous
+                        </Button>
+                    </div>
+                    <div>
+                        <Button
+                            className='form-button text-medium form-text active-button'
+                            onClick={() => {props.onTriggerNext()}}
+                            type='button'
+                        >
+                            Next
+                        </Button>
+                    </div>
+                </div>
         </div>
     )
 }
