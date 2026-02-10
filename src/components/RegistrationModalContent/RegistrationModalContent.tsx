@@ -1,10 +1,14 @@
 import Typography from "../Typography/Typography.tsx";
 import Button from "../Button/Button.tsx";
-import {useOnboardingFormData} from "../../context/OnboardingFormContext.tsx";
+import {useOnboardingFormApi, useOnboardingFormData} from "../../context/OnboardingFormContext.tsx";
 import "./RegistrationModalContent.css";
+// import useUserMutation from "../../hooks/useUserMutation.ts";
 
 const RegistrationModalContent = ({title}:{title:string}) => {
     const { accountType, firstForm, secondForm } = useOnboardingFormData();
+    const {onTriggerReset} = useOnboardingFormApi()
+    // const {error, loading} = useUserMutation();
+
     return (
         <div className='d-flex flex-column registration-modal-content-wrapper'>
             <div className='registration-modal-content-header'>
@@ -66,7 +70,7 @@ const RegistrationModalContent = ({title}:{title:string}) => {
                 <div>
                     <Button
                         className='form-button text-medium form-text'
-                        // onClick={() => {props.onTriggerPrevious()}}
+                        onClick={() => {onTriggerReset()}}
                         type='button'
                     >
                         Reset
