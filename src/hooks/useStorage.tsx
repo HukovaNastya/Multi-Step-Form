@@ -2,12 +2,6 @@ const Local_Storage_Keys ={
     AccountType: 'accountType',
     FirstForm: 'firstForm',
     SecondForm:'secondForm',
-    Name: 'name',
-    Email: 'email',
-    Age: 'age',
-    Interest: 'interest',
-    Description: 'description',
-    Password: 'password'
 }
 
 const getItem = (key:string) => {

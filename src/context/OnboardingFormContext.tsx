@@ -1,5 +1,6 @@
 import {createContext, useCallback, useContext, useMemo, useState} from "react";
 import localStorageService from "../hooks/useStorage.tsx";
+import useUserMutation from "../hooks/useUserMutation.ts";
 
 type FirstForm = {
     name: string;
@@ -32,6 +33,7 @@ type FormContextApi = {
     onTriggerReset: () => void;
     setStep: (step: number) => void;
     setModalOpen: (value: boolean) => void;
+    onTriggerSent: () => void;
 }
 
 const OnboardingFormContextData = createContext<FormContextValue>({
@@ -59,6 +61,7 @@ const OnboardingFormContextApi = createContext<FormContextApi>({
     onTriggerReset: () => {},
     setStep: () => {},
     setModalOpen: () => {},
+    onTriggerSent: () => {}
 });
 
 type FormProviderProps = {
@@ -67,11 +70,13 @@ type FormProviderProps = {
 
 const storageKeys = localStorageService.Local_Storage_Keys;
 
+
 function OnboardingFormProvider({ children }: FormProviderProps) {
     const [accountType, setAccountType] = useState<AccountType>({
         type: localStorage.getItem(storageKeys.AccountType) || "personal",
     });
     const [step, setStep] = useState(0);
+    const { createUser } = useUserMutation();
 
     const [isModalOpen, setModalOpen] = useState(false);
 
@@ -109,11 +114,29 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
     const onTriggerReset = useCallback(() => {
         localStorage.setItem(storageKeys.FirstForm, "")
         localStorage.setItem(storageKeys.SecondForm, "")
+        updateFirstFormField("name", "");
+        updateSecondFormField("age", "");
         setAccountTypeValue("personal");
+        updateFirstFormField("email", "")
+        updateFirstFormField("password", "")
+        updateSecondFormField("interest", "")
+        updateSecondFormField("description", "")
         setStep(0);
         return setModalOpen(false);
-        // updateFirstFormField(name, "")
 
+    }, []);
+
+    const onTriggerSent = useCallback(async() => {
+       await createUser({
+                    name: firstForm.name,
+                    age: parseFloat(secondForm.age),
+                    email: firstForm.email,
+                    accountType: accountType.type,
+                    password: firstForm.password,
+                    interests: secondForm.interest,
+                    description: secondForm.description,
+        })
+        onTriggerReset();
     }, []);
 
     const data = useMemo(() => ({
@@ -130,9 +153,10 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         updateSecondFormField,
         onTriggerReset,
         setStep,
-        setModalOpen
+        setModalOpen,
+        onTriggerSent
     }),
-        [setAccountTypeValue, updateFirstFormField,  updateSecondFormField, onTriggerReset, setStep, setModalOpen]);
+        [setAccountTypeValue, updateFirstFormField,  updateSecondFormField, onTriggerReset, setStep, setModalOpen, onTriggerSent]);
 
 
     return (

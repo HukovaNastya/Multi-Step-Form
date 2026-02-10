@@ -2,12 +2,27 @@ import Typography from "../Typography/Typography.tsx";
 import Button from "../Button/Button.tsx";
 import {useOnboardingFormApi, useOnboardingFormData} from "../../context/OnboardingFormContext.tsx";
 import "./RegistrationModalContent.css";
+// import {useCallback} from "react";
 // import useUserMutation from "../../hooks/useUserMutation.ts";
 
 const RegistrationModalContent = ({title}:{title:string}) => {
     const { accountType, firstForm, secondForm } = useOnboardingFormData();
-    const {onTriggerReset} = useOnboardingFormApi()
-    // const {error, loading} = useUserMutation();
+    // const { createUser } = useUserMutation();
+    const {onTriggerReset, onTriggerSent  } = useOnboardingFormApi()
+
+    // const onTriggerSent = useCallback(async() => {
+    //     await createUser({
+    //         name: firstForm.name,
+    //         age: parseFloat(secondForm.age),
+    //         email: firstForm.email,
+    //         accountType: accountType.type,
+    //         password: firstForm.password,
+    //         interests: secondForm.interest,
+    //         description: secondForm.description,
+    //     })
+    //     onTriggerReset()
+    //
+    // }, []);
 
     return (
         <div className='d-flex flex-column registration-modal-content-wrapper'>
@@ -70,7 +85,7 @@ const RegistrationModalContent = ({title}:{title:string}) => {
                 <div>
                     <Button
                         className='form-button text-medium form-text'
-                        onClick={() => {onTriggerReset()}}
+                        onClick={() => onTriggerReset()}
                         type='button'
                     >
                         Reset
@@ -79,7 +94,7 @@ const RegistrationModalContent = ({title}:{title:string}) => {
                 <div>
                     <Button
                         className='form-button text-medium form-text active-button'
-                        // onClick={() =>{props.onTriggerSubmit()}}
+                        onClick={() =>onTriggerSent()}
                         type='button'
                     >
                         Sent
