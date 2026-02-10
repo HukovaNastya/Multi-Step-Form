@@ -1,0 +1,13 @@
+.registration-modal-content-header {
+    padding-bottom: 30px;
+}
+
+.registration-modal-content div + div {
+    padding-top: 16px;
+}
+
+.modal-content-item .modal-content-title + .modal-content-subtext {
+    padding-left: 16px;
+}
+
+
