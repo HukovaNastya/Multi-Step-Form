@@ -7,6 +7,8 @@ import Stepper from "../Stepper/Stepper.tsx";
 import Modal from "../Modal/Modal.tsx";
 import RegistrationModalContent from "../RegistrationModalContent/RegistrationModalContent.tsx";
 import {useOnboardingFormData, useOnboardingFormApi} from "../../context/OnboardingFormContext.tsx";
+import {type Content, Contents} from "../RegistrationModalContent/interface.ts";
+import useUserMutation from "../../hooks/useUserMutation.ts";
 // import Typography from "../Typography/Typography.tsx";
 // import {createUser} from "../../services/onboardingForm.services.ts";
 // import {useOnboardingFormData} from "../../context/OnboardingFormContext.tsx";
@@ -18,6 +20,7 @@ const RegistrationForm = () => {
     // const [isModalOpen, setModalOpen] = useState(false);
     const { step, isModalOpen } = useOnboardingFormData()
     const {setStep, setModalOpen} = useOnboardingFormApi();
+    const {loading, error}  = useUserMutation()
 
     const onFormSubmit = (e: any) => {
         e.preventDefault();
@@ -49,6 +52,11 @@ const RegistrationForm = () => {
         setModalOpen(true);
     }
 
+    const contentValue: Content =
+        loading ? Contents.Loading :
+            error ? Contents.Error :
+                Contents.Info;
+
 
     return (
         <div>
@@ -71,7 +79,7 @@ const RegistrationForm = () => {
             </div>
             {isModalOpen ? (
                 <Modal isActive={isModalOpen} toggleModal={setModalOpen}>
-                    <RegistrationModalContent title='Registration Summary:'/>
+                    <RegistrationModalContent title='Registration Summary:' content={contentValue}/>
                 </Modal>
             ): null}
         </div>

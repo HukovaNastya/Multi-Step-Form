@@ -1,28 +1,21 @@
+import type {JSX} from "react";
 import Typography from "../Typography/Typography.tsx";
 import Button from "../Button/Button.tsx";
-import {useOnboardingFormApi, useOnboardingFormData} from "../../context/OnboardingFormContext.tsx";
+import {useOnboardingFormApi} from "../../context/OnboardingFormContext.tsx";
 import "./RegistrationModalContent.css";
-// import {useCallback} from "react";
-// import useUserMutation from "../../hooks/useUserMutation.ts";
+import {ComponentsMapping} from "./helper.ts";
+import type {Content} from "./interface.ts";
 
-const RegistrationModalContent = ({title}:{title:string}) => {
-    const { accountType, firstForm, secondForm } = useOnboardingFormData();
-    // const { createUser } = useUserMutation();
-    const {onTriggerReset, onTriggerSent  } = useOnboardingFormApi()
 
-    // const onTriggerSent = useCallback(async() => {
-    //     await createUser({
-    //         name: firstForm.name,
-    //         age: parseFloat(secondForm.age),
-    //         email: firstForm.email,
-    //         accountType: accountType.type,
-    //         password: firstForm.password,
-    //         interests: secondForm.interest,
-    //         description: secondForm.description,
-    //     })
-    //     onTriggerReset()
-    //
-    // }, []);
+type RegistrationModalContentProps = {
+    content: Content;
+    title: string;
+}
+
+const RegistrationModalContent = ({content, title}:RegistrationModalContentProps) => {
+    const {onTriggerReset, onTriggerSent  } = useOnboardingFormApi();
+
+    let Component: () => JSX.Element = ComponentsMapping[content];
 
     return (
         <div className='d-flex flex-column registration-modal-content-wrapper'>
@@ -31,56 +24,7 @@ const RegistrationModalContent = ({title}:{title:string}) => {
                     {title}
                 </Typography>
             </div>
-            <div className='registration-modal-content d-flex flex-column'>
-                <div className='modal-content-item d-flex'>
-                    <Typography variant='h4' className='form-text  modal-text modal-content-title' >
-                        Account Type:
-                    </Typography>
-                    <Typography variant='h4' className='form-text  modal-subtext  modal-content-subtext' >
-                        {accountType.type}
-                    </Typography>
-                </div>
-                <div className='d-flex modal-content-item'>
-                    <Typography variant='h4' className='form-text  modal-text modal-content-title' >
-                        Name:
-                    </Typography>
-                    <Typography variant='h4' className='form-text  modal-subtext  modal-content-subtext' >
-                        {firstForm.name}
-                    </Typography>
-                </div>
-                <div className='d-flex modal-content-item'>
-                    <Typography variant='h4' className='form-text  modal-text modal-content-title' >
-                        Email:
-                    </Typography>
-                    <Typography variant='h4' className='form-text  modal-subtext  modal-content-subtext' >
-                        {firstForm.email}
-                    </Typography>
-                </div>
-                <div className='d-flex modal-content-item'>
-                    <Typography variant='h4' className='form-text  modal-text modal-content-title' >
-                        Age:
-                    </Typography>
-                    <Typography variant='h4' className='form-text  modal-subtext  modal-content-subtext' >
-                        {secondForm.age}
-                    </Typography>
-                </div>
-                <div className='d-flex modal-content-item'>
-                    <Typography variant='h4' className='form-text  modal-text modal-content-title' >
-                        Area of Interest:
-                    </Typography>
-                    <Typography variant='h4' className='form-text  modal-subtext  modal-content-subtext' >
-                        {secondForm.interest}
-                    </Typography>
-                </div>
-                <div className='d-flex modal-content-item'>
-                    <Typography variant='h4' className='form-text  modal-text modal-content-title' >
-                        Bio/Description:
-                    </Typography>
-                    <Typography variant='h4' className='form-text  modal-subtext  modal-content-subtext' >
-                        {secondForm.description}
-                    </Typography>
-                </div>
-            </div>
+            <Component/>
             <div className='form-buttons d-flex justify-end registration-modal-content-button'>
                 <div>
                     <Button
