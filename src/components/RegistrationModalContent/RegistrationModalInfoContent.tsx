@@ -10,7 +10,7 @@ const RegistrationModalInfoContent = () => {
             <RegistrationModalContentItem title='Email:' text={firstForm.email}/>
             <RegistrationModalContentItem title='Age:' text={secondForm.age}/>
             <RegistrationModalContentItem title='Area of Interest:' text={secondForm.interest}/>
-            <RegistrationModalContentItem title='Bio/Description:' text=     {secondForm.description}/>
+            <RegistrationModalContentItem title='Bio/Description:' text={secondForm.description}/>
         </div>
     )
 }
