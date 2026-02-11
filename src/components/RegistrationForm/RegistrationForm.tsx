@@ -9,18 +9,12 @@ import RegistrationModalContent from "../RegistrationModalContent/RegistrationMo
 import {useOnboardingFormData, useOnboardingFormApi} from "../../context/OnboardingFormContext.tsx";
 import {type Content, Contents} from "../RegistrationModalContent/interface.ts";
 import useUserMutation from "../../hooks/useUserMutation.ts";
-// import Typography from "../Typography/Typography.tsx";
-// import {createUser} from "../../services/onboardingForm.services.ts";
-// import {useOnboardingFormData} from "../../context/OnboardingFormContext.tsx";
-// import localStorageServise from "../../hooks/useStorage.tsx";
-//
-// const storageKeys = localStorageServise.Local_Storage_Keys;
+
 
 const RegistrationForm = () => {
-    // const [isModalOpen, setModalOpen] = useState(false);
     const { step, isModalOpen } = useOnboardingFormData()
     const {setStep, setModalOpen} = useOnboardingFormApi();
-    const {loading, error}  = useUserMutation()
+    const {loading, error}  = useUserMutation();
 
     const onFormSubmit = (e: any) => {
         e.preventDefault();
@@ -32,9 +26,6 @@ const RegistrationForm = () => {
             {id: 2, label: 'Personal Information'},
             {id: 3, label: 'Profile Data'},
         ];
-
-    // const [step, setStep] = useState(0);
-
 
     const onNextClick = () => {
         if (step < Object.entries(steps).length) {

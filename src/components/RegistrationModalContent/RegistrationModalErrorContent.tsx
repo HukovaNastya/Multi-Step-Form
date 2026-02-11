@@ -1,7 +1,10 @@
+import useUserMutation from "../../hooks/useUserMutation.ts";
+
 const RegistrationModalErrorContent = () => {
+    const {error}  = useUserMutation()
     return (
        <div>
-           Error
+           {error?.message}
        </div>
     )
 }
