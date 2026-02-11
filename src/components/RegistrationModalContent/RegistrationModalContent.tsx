@@ -3,9 +3,8 @@ import Typography from "../Typography/Typography.tsx";
 import Button from "../Button/Button.tsx";
 import {useOnboardingFormApi} from "../../context/OnboardingFormContext.tsx";
 import "./RegistrationModalContent.css";
-import {ComponentsMapping} from "./helper.ts";
+import {ComponentsMapping} from "./index.ts";
 import type {Content} from "./interface.ts";
-
 
 type RegistrationModalContentProps = {
     content: Content;
