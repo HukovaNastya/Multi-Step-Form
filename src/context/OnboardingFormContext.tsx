@@ -24,6 +24,7 @@ type FormContextValue = {
     accountType: AccountType;
     step:number;
     isModalOpen:boolean;
+    userId: string;
 };
 
 type FormContextApi = {
@@ -52,6 +53,7 @@ const OnboardingFormContextData = createContext<FormContextValue>({
     },
     step:0,
     isModalOpen: false,
+    userId: "",
 });
 
 const OnboardingFormContextApi = createContext<FormContextApi>({
@@ -76,6 +78,10 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         type: localStorage.getItem(storageKeys.AccountType) || "personal",
     });
     const [step, setStep] = useState(0);
+    const [userId, setUserId] = useState(() => {
+        const storedId = localStorage.getItem(storageKeys.UserId)
+        return storedId ? JSON.parse(storedId) : "";
+    });
     const { createUser } = useUserMutation();
 
     const [isModalOpen, setModalOpen] = useState(false);
@@ -122,12 +128,12 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         updateSecondFormField("interest", "")
         updateSecondFormField("description", "")
         setStep(0);
-        return setModalOpen(false);
+        setModalOpen(false);
 
     }, []);
 
     const onTriggerSent = useCallback(async() => {
-       await createUser({
+     const data = await createUser({
                     name: firstForm.name,
                     age: parseFloat(secondForm.age),
                     email: firstForm.email,
@@ -136,8 +142,10 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
                     interests: secondForm.interest,
                     description: secondForm.description,
         })
+        setUserId(data?.id);
+        localStorage.setItem(storageKeys.UserId, JSON.stringify(data?.id))
         onTriggerReset();
-    }, []);
+    }, [firstForm, secondForm, accountType, onTriggerReset, createUser]);
 
     const data = useMemo(() => ({
             accountType,
@@ -145,8 +153,10 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
             secondForm,
             isModalOpen,
             step,
+            userId
     }),
-        [accountType, firstForm, secondForm, isModalOpen, step, isModalOpen]);
+        [accountType, firstForm, secondForm, isModalOpen, step, isModalOpen, userId]);
+
     const api = useMemo(() => ({
         setAccountTypeValue,
         updateFirstFormField,

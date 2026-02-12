@@ -44,7 +44,7 @@ body {
   justify-content: space-between;
 }
 
-.registration-form-wrapper {
+.registration-form-wrapper, .home-page-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;

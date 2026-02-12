@@ -1,10 +1,25 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router";
+import UsersInfoPage from "./pages/UsersInfoPage.tsx";
+import RegistrationPage from "./pages/RegistrationPage.tsx";
+import App from "./App.tsx";
+import HomePage from "./pages/HomePage.tsx";
+import {OnboardingFormProvider} from "./context/OnboardingFormContext.tsx";
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const root = document.getElementById("root");
+
+if (!root) throw new Error("Root element not found");
+
+ReactDOM.createRoot(root).render(
+    <OnboardingFormProvider>
+        <BrowserRouter>
+            <Routes>
+                <Route element={<App />}>
+                    <Route path="/home" element={<HomePage />} />
+                    <Route path="/about-user" element={<UsersInfoPage />} />
+                    <Route path="/registration" element={<RegistrationPage />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    </OnboardingFormProvider>
+);
