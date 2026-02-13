@@ -109,6 +109,11 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         })
     }, []);
 
+    const resetFirstForm = () => {
+        localStorage.removeItem(storageKeys.FirstForm)
+        setFirstForm({ name: "", email: "", password: "" });
+    }
+
     const updateSecondFormField = useCallback((field: keyof SecondForm, value: string) => {
         setSecondForm(prevState => {
             const newState = {...prevState, [field]: value}
@@ -119,12 +124,14 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
 
     const onTriggerReset = useCallback(() => {
         localStorage.setItem(storageKeys.FirstForm, "")
+        // localStorage.removeItem(storageKeys.FirstForm)
         localStorage.setItem(storageKeys.SecondForm, "")
-        updateFirstFormField("name", "");
+        resetFirstForm()
+        // updateFirstFormField("name", "");
         updateSecondFormField("age", "");
         setAccountTypeValue("personal");
-        updateFirstFormField("email", "")
-        updateFirstFormField("password", "")
+        // updateFirstFormField("email", "")
+        // updateFirstFormField("password", "")
         updateSecondFormField("interest", "")
         updateSecondFormField("description", "")
         setStep(0);
@@ -133,14 +140,14 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
     }, []);
 
     const onTriggerSent = useCallback(async() => {
-     const data = await createUser({
-                    name: firstForm.name,
-                    age: parseFloat(secondForm.age),
-                    email: firstForm.email,
-                    accountType: accountType.type,
-                    password: firstForm.password,
-                    interests: secondForm.interest,
-                    description: secondForm.description,
+        const data = await createUser({
+            name: firstForm.name,
+            age: parseFloat(secondForm.age),
+            email: firstForm.email,
+            accountType: accountType.type,
+            password: firstForm.password,
+            interests: secondForm.interest,
+            description: secondForm.description,
         })
         setUserId(data?.id);
         localStorage.setItem(storageKeys.UserId, JSON.stringify(data?.id))
@@ -154,8 +161,7 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
             isModalOpen,
             step,
             userId
-    }),
-        [accountType, firstForm, secondForm, isModalOpen, step, isModalOpen, userId]);
+    }), [accountType, firstForm, secondForm, isModalOpen, step, userId]);
 
     const api = useMemo(() => ({
         setAccountTypeValue,
@@ -165,8 +171,7 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         setStep,
         setModalOpen,
         onTriggerSent
-    }),
-        [setAccountTypeValue, updateFirstFormField,  updateSecondFormField, onTriggerReset, setStep, setModalOpen, onTriggerSent]);
+    }), [setAccountTypeValue, updateFirstFormField,  updateSecondFormField, onTriggerReset, setStep, setModalOpen, onTriggerSent]);
 
 
     return (

@@ -1,4 +1,4 @@
-import type {OnboardingFormBody} from "./onboardingForm.model.ts";
+import type {OnboardingFormBody, User} from "./onboardingForm.model.ts";
 import request from "./axios.ts";
 
 export async function createUser(body:OnboardingFormBody) {
@@ -6,7 +6,7 @@ export async function createUser(body:OnboardingFormBody) {
     return data;
 }
 
-export async function getUserById(id:string) {
-    const data = await request.get(`/users/${id}`)
-    return data;
+export async function getUserById(id:string): Promise<User> {
+    const response = await request.get<User>(`/users/${id}`)
+    return response.data;
 }

@@ -5,9 +5,10 @@ import useUser from "../hooks/useUserQuery.ts";
 const UsersInfoPage = () => {
     const {userId} = useOnboardingFormData();
     console.log(userId)
-    const {userInfo} = useUser(userId);
+    const {userInfo, isLoading} = useUser(userId);
 
     console.log(userInfo)
+    if (!userInfo && !isLoading) return (<div>User not found</div>);
 
     return (
        <div>

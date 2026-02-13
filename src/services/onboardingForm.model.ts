@@ -7,3 +7,7 @@ export interface OnboardingFormBody{
     interests: string;
     description: string;
 }
+
+export interface User extends OnboardingFormBody {
+    id: string;
+}

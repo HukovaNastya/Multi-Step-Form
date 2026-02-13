@@ -12,9 +12,14 @@ type RegistrationModalContentProps = {
 }
 
 const RegistrationModalContent = ({content, title}:RegistrationModalContentProps) => {
-    const {onTriggerReset, onTriggerSent  } = useOnboardingFormApi();
+    const {onTriggerReset, onTriggerSent } = useOnboardingFormApi();
 
-    let Component: () => JSX.Element = ComponentsMapping[content];
+    const Component: () => JSX.Element = ComponentsMapping[content];
+
+    const onSentHandler = () => {
+        // TODO: rename onTriggerSent to something more meaningful
+        onTriggerSent()
+    }
 
     return (
         <div className='d-flex flex-column registration-modal-content-wrapper'>
@@ -37,7 +42,7 @@ const RegistrationModalContent = ({content, title}:RegistrationModalContentProps
                 <div>
                     <Button
                         className='form-button text-medium form-text active-button'
-                        onClick={() =>onTriggerSent()}
+                        onClick={onSentHandler}
                         type='button'
                     >
                         Sent
