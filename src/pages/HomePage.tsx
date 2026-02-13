@@ -3,7 +3,7 @@ import {NavLink} from "react-router";
 
 const HomePage = () => {
     return (
-        <div className="d-flex justify-center home-page-wrapper">
+        <div className="d-flex justify-space-between home-page-wrapper">
             <div>
                 <NavLink
                     to="/about-user"
@@ -11,7 +11,7 @@ const HomePage = () => {
                     Check Information about user
                 </NavLink>
             </div>
-            <div style={{ padding: "0 30px 0 0" }}>
+            <div >
                 <NavLink
                     to="/registration"
                 >

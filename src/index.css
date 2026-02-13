@@ -121,3 +121,7 @@ body {
 .justify-end {
   justify-content: end;
 }
+
+.home-page-wrapper {
+  gap: 30px;
+}
