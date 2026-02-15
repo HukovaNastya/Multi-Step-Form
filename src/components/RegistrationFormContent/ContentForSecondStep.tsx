@@ -4,14 +4,10 @@ import Button from "../Button/Button.tsx";
 import { debounce } from '../../utils/debounce.ts'
 import type {ChangeEvent} from "react";
 
-type ContentForSecondStepProps = {
-    onTriggerNext: () => void;
-    onTriggerPrevious: () => void;
-}
 
-const ContentForSecondStep = (props: ContentForSecondStepProps) => {
+const ContentForSecondStep = () => {
     const { firstForm } = useOnboardingFormData();
-    const { updateFirstFormField } = useOnboardingFormApi()
+    const { updateFirstFormField, onTriggerNext, onTriggerPrevious } = useOnboardingFormApi()
 
     const onNameChange = (e: ChangeEvent<HTMLInputElement>) => {
         updateFirstFormField("name", e.target.value)
@@ -55,7 +51,7 @@ const ContentForSecondStep = (props: ContentForSecondStepProps) => {
                     <div>
                         <Button
                             className='form-button text-medium form-text'
-                            onClick={() => {props.onTriggerPrevious()}}
+                            onClick={() => {onTriggerPrevious()}}
                             type='button'
                         >
                             Previous
@@ -64,7 +60,7 @@ const ContentForSecondStep = (props: ContentForSecondStepProps) => {
                     <div>
                         <Button
                             className='form-button text-medium form-text active-button'
-                            onClick={() => {props.onTriggerNext()}}
+                            onClick={() => {onTriggerNext()}}
                             type='button'
                         >
                             Next

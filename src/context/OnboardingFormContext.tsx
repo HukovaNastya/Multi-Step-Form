@@ -35,6 +35,9 @@ type FormContextApi = {
     setStep: (step: number) => void;
     setModalOpen: (value: boolean) => void;
     sentUserData: () => void;
+    onTriggerNext: () => void;
+    onTriggerPrevious: () => void;
+    onFormSubmit: (e: any) => void;
 }
 
 const OnboardingFormContextData = createContext<FormContextValue>({
@@ -63,7 +66,10 @@ const OnboardingFormContextApi = createContext<FormContextApi>({
     resetUserData: () => {},
     setStep: () => {},
     setModalOpen: () => {},
-    sentUserData: () => {}
+    sentUserData: () => {},
+    onTriggerNext: () => {},
+    onTriggerPrevious: () => {},
+    onFormSubmit: () => {}
 });
 
 type FormProviderProps = {
@@ -124,6 +130,11 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         setAccountType({type: "personal"})
     }
 
+    const onFormSubmit = (e: any) => {
+        e.preventDefault();
+        setModalOpen(true);
+    }
+
     const updateSecondFormField = useCallback((field: keyof SecondForm, value: string) => {
         setSecondForm(prevState => {
             const newState = {...prevState, [field]: value}
@@ -157,6 +168,15 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         resetAccountType();
     }, [firstForm, secondForm, accountType, resetUserData, createUser]);
 
+
+    const onTriggerNext = () => {
+       setStep(step + 1);
+    }
+
+    const onTriggerPrevious = () => {
+        setStep(step - 1);
+    }
+
     const data = useMemo(() => ({
             accountType,
             firstForm,
@@ -166,6 +186,8 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
             userId
     }), [accountType, firstForm, secondForm, isModalOpen, step, userId]);
 
+
+
     const api = useMemo(() => ({
         setAccountTypeValue,
         updateFirstFormField,
@@ -173,8 +195,11 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         resetUserData,
         setStep,
         setModalOpen,
-        sentUserData
-    }), [setAccountTypeValue, updateFirstFormField,  updateSecondFormField, resetUserData, setStep, setModalOpen, sentUserData]);
+        sentUserData,
+        onTriggerNext,
+        onTriggerPrevious,
+        onFormSubmit
+    }), [setAccountTypeValue, updateFirstFormField,  updateSecondFormField, resetUserData, setStep, setModalOpen, sentUserData, onTriggerNext, onTriggerPrevious, onFormSubmit]);
 
 
     return (

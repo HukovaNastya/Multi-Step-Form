@@ -3,13 +3,10 @@ import AccountOption from "../AccountOption/AccountOption.tsx";
 import {useOnboardingFormApi, useOnboardingFormData} from "../../context/OnboardingFormContext.tsx";
 import Button from "../Button/Button.tsx";
 
-type ContentForFirstStepProps = {
-    onTriggerNext: () => void;
-};
 
-const ContentForFirstStep = (props: ContentForFirstStepProps) => {
+const ContentForFirstStep = () => {
     const { accountType } = useOnboardingFormData()
-    const { setAccountTypeValue } = useOnboardingFormApi()
+    const { setAccountTypeValue, onTriggerNext } = useOnboardingFormApi()
 
     return (
       <div className="content d-flex flex-column">
@@ -38,7 +35,7 @@ const ContentForFirstStep = (props: ContentForFirstStepProps) => {
                   <Button
                       className='form-button text-medium form-text active-button'
                       onClick={() => {
-                          props.onTriggerNext()
+                         onTriggerNext()
                       }}
                       type='button'
                   >

@@ -1,7 +1,7 @@
 import "./RegistrationForm.css"
 import Form from "../Form/Form.tsx";
 import FormHeader from "../FormHeader/FormHeader.tsx";
-import RegistrationFormContent from "../RegistrationFormContent";
+import RegistrationFormContent from "../RegistrationFormContent/RegistrationFormContent.tsx";
 import Stepper from "../Stepper/Stepper.tsx";
 
 import Modal from "../Modal/Modal.tsx";
@@ -9,17 +9,18 @@ import RegistrationModalContent from "../RegistrationModalContent/RegistrationMo
 import {useOnboardingFormData, useOnboardingFormApi} from "../../context/OnboardingFormContext.tsx";
 import {type Content, Contents} from "../RegistrationModalContent/interface.ts";
 import useUserMutation from "../../hooks/useUserMutation.ts";
+import {Steps} from "../RegistrationFormContent/interface.tsx";
 
 
 const RegistrationForm = () => {
     const { step, isModalOpen } = useOnboardingFormData()
-    const {setStep, setModalOpen} = useOnboardingFormApi();
+    const { setModalOpen, onFormSubmit} = useOnboardingFormApi();
     const {loading, error}  = useUserMutation();
 
-    const onFormSubmit = (e: any) => {
-        e.preventDefault();
-        setModalOpen(true);
-    }
+    // const onFormSubmit = (e: any) => {
+    //     e.preventDefault();
+    //     setModalOpen(true);
+    // }
 
     const steps =  [
             {id: 1, label: 'Account Type'},
@@ -27,27 +28,14 @@ const RegistrationForm = () => {
             {id: 3, label: 'Profile Data'},
         ];
 
-    const onNextClick = () => {
-        if (step < Object.entries(steps).length) {
-            setStep(step + 1);
-        }
-    }
-
-    const onPreviousClick = () => {
-        if (step > 0) {
-            setStep(step - 1);
-        }
-    }
-
-    const onSubmitClick = () => {
-        setModalOpen(true);
-    }
-
     const contentValue: Content =
         loading ? Contents.Loading :
             error ? Contents.Error :
                 Contents.Info;
 
+ const registrationFormContent =  step === 0 ?
+     Steps.FirstStep : step === 1 ?
+         Steps.SecondStep : Steps.ThirdStep;
 
     return (
         <div>
@@ -61,10 +49,7 @@ const RegistrationForm = () => {
                         />
                     </div>
                     <RegistrationFormContent
-                        step={step}
-                        onTriggerNext={onNextClick}
-                        onTriggerPrev={onPreviousClick}
-                        onTriggerSubmit={onSubmitClick}
+                       formContent={registrationFormContent}
                     />
                 </Form>
             </div>

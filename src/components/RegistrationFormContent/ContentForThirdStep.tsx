@@ -3,15 +3,9 @@ import {useOnboardingFormApi, useOnboardingFormData} from "../../context/Onboard
 import Button from "../Button/Button.tsx";
 import type {ChangeEvent} from "react";
 
-type ContentForThirdStepProps = {
-    onTriggerSubmit: () => void;
-    onTriggerPrevious: () => void;
-}
-
-
-const ContentForThirdStep= (props: ContentForThirdStepProps) => {
+const ContentForThirdStep= () => {
     const {secondForm} = useOnboardingFormData();
-    const { updateSecondFormField } = useOnboardingFormApi()
+    const { updateSecondFormField, onTriggerPrevious } = useOnboardingFormApi()
 
     const onAgeChange = (e: ChangeEvent<HTMLInputElement>) => {
         updateSecondFormField("age", e.target.value)
@@ -55,7 +49,7 @@ const ContentForThirdStep= (props: ContentForThirdStepProps) => {
                 <div>
                     <Button
                         className='form-button text-medium form-text'
-                        onClick={() => {props.onTriggerPrevious()}}
+                        onClick={() => {onTriggerPrevious()}}
                         type='button'
                     >
                         Previous
@@ -64,7 +58,6 @@ const ContentForThirdStep= (props: ContentForThirdStepProps) => {
                 <div>
                     <Button
                         className='form-button text-medium form-text active-button'
-                        onClick={() =>{props.onTriggerSubmit()}}
                         type='button'
                     >
                         Submit
