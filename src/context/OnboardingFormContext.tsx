@@ -31,10 +31,10 @@ type FormContextApi = {
     setAccountTypeValue: (type: string) => void;
     updateFirstFormField: (field: keyof FirstForm, value: string) => void;
     updateSecondFormField: (field: keyof SecondForm, value: string) => void;
-    onTriggerReset: () => void;
+    resetUserData: () => void;
     setStep: (step: number) => void;
     setModalOpen: (value: boolean) => void;
-    onTriggerSent: () => void;
+    sentUserData: () => void;
 }
 
 const OnboardingFormContextData = createContext<FormContextValue>({
@@ -60,10 +60,10 @@ const OnboardingFormContextApi = createContext<FormContextApi>({
     setAccountTypeValue: () => {},
     updateFirstFormField: () => {},
     updateSecondFormField: () => {},
-    onTriggerReset: () => {},
+    resetUserData: () => {},
     setStep: () => {},
     setModalOpen: () => {},
-    onTriggerSent: () => {}
+    sentUserData: () => {}
 });
 
 type FormProviderProps = {
@@ -114,6 +114,16 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         setFirstForm({ name: "", email: "", password: "" });
     }
 
+    const resetSecondForm = () => {
+        localStorage.removeItem(storageKeys.SecondForm);
+        setSecondForm({age: "", interest: "", description: ""});
+    }
+
+    const resetAccountType = () => {
+        localStorage.removeItem(storageKeys.AccountType);
+        setAccountType({type: "personal"})
+    }
+
     const updateSecondFormField = useCallback((field: keyof SecondForm, value: string) => {
         setSecondForm(prevState => {
             const newState = {...prevState, [field]: value}
@@ -122,24 +132,15 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         })
     }, []);
 
-    const onTriggerReset = useCallback(() => {
-        localStorage.setItem(storageKeys.FirstForm, "")
-        // localStorage.removeItem(storageKeys.FirstForm)
-        localStorage.setItem(storageKeys.SecondForm, "")
-        resetFirstForm()
-        // updateFirstFormField("name", "");
-        updateSecondFormField("age", "");
-        setAccountTypeValue("personal");
-        // updateFirstFormField("email", "")
-        // updateFirstFormField("password", "")
-        updateSecondFormField("interest", "")
-        updateSecondFormField("description", "")
+    const resetUserData = useCallback(() => {
+        resetFirstForm();
+        resetSecondForm();
+        resetAccountType();
         setStep(0);
         setModalOpen(false);
-
     }, []);
 
-    const onTriggerSent = useCallback(async() => {
+    const sentUserData = useCallback(async() => {
         const data = await createUser({
             name: firstForm.name,
             age: parseFloat(secondForm.age),
@@ -151,8 +152,10 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         })
         setUserId(data?.id);
         localStorage.setItem(storageKeys.UserId, JSON.stringify(data?.id))
-        onTriggerReset();
-    }, [firstForm, secondForm, accountType, onTriggerReset, createUser]);
+        resetFirstForm();
+        resetSecondForm();
+        resetAccountType();
+    }, [firstForm, secondForm, accountType, resetUserData, createUser]);
 
     const data = useMemo(() => ({
             accountType,
@@ -167,11 +170,11 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         setAccountTypeValue,
         updateFirstFormField,
         updateSecondFormField,
-        onTriggerReset,
+        resetUserData,
         setStep,
         setModalOpen,
-        onTriggerSent
-    }), [setAccountTypeValue, updateFirstFormField,  updateSecondFormField, onTriggerReset, setStep, setModalOpen, onTriggerSent]);
+        sentUserData
+    }), [setAccountTypeValue, updateFirstFormField,  updateSecondFormField, resetUserData, setStep, setModalOpen, sentUserData]);
 
 
     return (
@@ -186,5 +189,4 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
 const useOnboardingFormData = () => useContext(OnboardingFormContextData)
 const useOnboardingFormApi = () => useContext(OnboardingFormContextApi);
 
-// eslint-disable-next-line react-refresh/only-export-components
 export { OnboardingFormProvider, useOnboardingFormData, useOnboardingFormApi}

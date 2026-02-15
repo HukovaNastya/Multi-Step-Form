@@ -1,11 +1,3 @@
-// Create user query hook, with GET request to /users/:id endpoint
-// method getUserById -> (id: string) -> returns user data
-// loading state, error state
-
-
-
-// const data = await getUserById()
-
 import {useCallback, useEffect, useState} from "react";
 import {getUserById} from "../services/onboardingForm.services.ts";
 import type {User} from "../services/onboardingForm.model.ts";
@@ -27,16 +19,22 @@ function useUser(userId:string) {
     }, [setError])
 
     const refetch = () => {
-        fetchUserById(userId).then(user => setUserInfo(user));
+        fetchUserById(userId).then((user) => {
+            if(user){
+                setUserInfo(user)
+            }
+        });
+
     }
 
     useEffect(() => {
-        // TODO: call fetchUserById only if userId is not null
+        if(!userId) return;
         fetchUserById(userId)
             .then((userInfo) => setUserInfo(userInfo || null));
     }, [userId, fetchUserById])
 
-    console.log(userInfo)
+    console.log(userInfo);
+
 
     return { userInfo, isLoading, error, refetch }
 }

@@ -12,13 +12,12 @@ type RegistrationModalContentProps = {
 }
 
 const RegistrationModalContent = ({content, title}:RegistrationModalContentProps) => {
-    const {onTriggerReset, onTriggerSent } = useOnboardingFormApi();
+    const {resetUserData, sentUserData } = useOnboardingFormApi();
 
     const Component: () => JSX.Element = ComponentsMapping[content];
 
     const onSentHandler = () => {
-        // TODO: rename onTriggerSent to something more meaningful
-        onTriggerSent()
+        sentUserData()
     }
 
     return (
@@ -33,7 +32,7 @@ const RegistrationModalContent = ({content, title}:RegistrationModalContentProps
                 <div>
                     <Button
                         className='form-button text-medium form-text'
-                        onClick={() => onTriggerReset()}
+                        onClick={() => resetUserData()}
                         type='button'
                     >
                         Reset

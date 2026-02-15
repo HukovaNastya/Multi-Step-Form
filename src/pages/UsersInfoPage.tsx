@@ -1,21 +1,27 @@
 import {useOnboardingFormData} from "../context/OnboardingFormContext.tsx";
 import useUser from "../hooks/useUserQuery.ts";
+import Typography from "../components/Typography/Typography.tsx";
 
 
 const UsersInfoPage = () => {
     const {userId} = useOnboardingFormData();
-    console.log(userId)
-    const {userInfo, isLoading} = useUser(userId);
+    const {userInfo} = useUser(userId);
 
     console.log(userInfo)
-    if (!userInfo && !isLoading) return (<div>User not found</div>);
 
     return (
-       <div>
-           <h1>Hello Dear User!</h1>
-           <h2>{userId ? userId : null}</h2>
-           {/*<h3>{userInfo?.name}</h3>*/}
-       </div>
+        <div className='page-wrapper'>
+            {
+                userId ? (
+                    <Typography className='form-text text-medium' variant='h3'>
+                        Hello dear User!
+                    </Typography>) : (
+                    <Typography className='text-large' variant='h3'>
+                        There is no registered user yet!
+                    </Typography>
+                )
+            }
+        </div>
     )
 }
 
