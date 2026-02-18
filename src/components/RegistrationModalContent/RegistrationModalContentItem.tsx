@@ -2,7 +2,7 @@ import Typography from "../Typography/Typography.tsx";
 
 type RegistrationModalContentItemProps = {
     title: string;
-    text:string;
+    text:string | undefined;
 }
 
 const RegistrationModalContentItem = ({title, text}: RegistrationModalContentItemProps) => {
