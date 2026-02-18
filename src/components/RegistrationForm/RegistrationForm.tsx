@@ -14,8 +14,8 @@ import {Steps} from "../RegistrationFormContent/interface.tsx";
 
 const RegistrationForm = () => {
     const { step, isModalOpen } = useOnboardingFormData()
-    const { setModalOpen} = useOnboardingFormApi();
-    const {loading, error}  = useUserMutation();
+    const { setModalOpen } = useOnboardingFormApi();
+    const { loading, error }  = useUserMutation();
 
     // const onFormSubmit = (e: any) => {
     //     e.preventDefault();
@@ -27,7 +27,7 @@ const RegistrationForm = () => {
             {id: 2, label: 'Personal Information'},
             {id: 3, label: 'Profile Data'},
         ];
-
+    // TODO: remove it
     const contentValue: Content =
         loading ? Contents.Loading :
             error ? Contents.Error :
@@ -53,8 +53,10 @@ const RegistrationForm = () => {
                     />
                 </Form>
             </div>
+            {/*TODO: move to ContentForThirdStep, isModalOpen and setModalOpen will be local component state */}
             {isModalOpen ? (
                 <Modal isActive={isModalOpen} toggleModal={setModalOpen}>
+                    {/*TODO: title and content should be removed*/}
                     <RegistrationModalContent title='Registration Summary:' content={contentValue}/>
                 </Modal>
             ): null}

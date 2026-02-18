@@ -13,7 +13,7 @@ type RegistrationModalContentProps = {
 
 const RegistrationModalContent = ({content, title}:RegistrationModalContentProps) => {
     const {resetUserData, sentUserData } = useOnboardingFormApi();
-
+    // TODO: use const { createUser, loading } = useUserMutation(); here and remove it from the context
     const Component: () => JSX.Element = ComponentsMapping[content];
 
     const onSentHandler = () => {

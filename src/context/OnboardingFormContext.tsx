@@ -84,10 +84,12 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         type: localStorage.getItem(storageKeys.AccountType) || "personal",
     });
     const [step, setStep] = useState(0);
+    // TODO: move it separate custom hook
     const [userId, setUserId] = useState(() => {
         const storedId = localStorage.getItem(storageKeys.UserId)
         return storedId ? JSON.parse(storedId) : "";
     });
+    // TODO: move it to particular component where it is used
     const { createUser } = useUserMutation();
 
     const [isModalOpen, setModalOpen] = useState(false);
@@ -151,6 +153,7 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         setModalOpen(false);
     }, []);
 
+    // TODO: Should be moved to specific component "Modal"
     const sentUserData = useCallback(async() => {
         const data = await createUser({
             name: firstForm.name,
