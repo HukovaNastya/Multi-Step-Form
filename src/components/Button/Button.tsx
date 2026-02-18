@@ -4,7 +4,7 @@ interface ButtonProps {
     variant?: 'span' | 'div';
     className?: string;
     children?: ReactNode;
-    onClick?:() => void;
+    onClick?:(() => void) | ((value:any) => void);
     disabled?:boolean;
     id?: any;
     type?:any;

@@ -5,7 +5,7 @@ import type {ChangeEvent} from "react";
 
 const ContentForThirdStep= () => {
     const {secondForm} = useOnboardingFormData();
-    const { updateSecondFormField, onTriggerPrevious } = useOnboardingFormApi()
+    const { updateSecondFormField, onTriggerPrevious, onFormSubmit } = useOnboardingFormApi()
 
     const onAgeChange = (e: ChangeEvent<HTMLInputElement>) => {
         updateSecondFormField("age", e.target.value)
@@ -59,6 +59,7 @@ const ContentForThirdStep= () => {
                     <Button
                         className='form-button text-medium form-text active-button'
                         type='button'
+                        onClick={(e:any) => onFormSubmit(e)}
                     >
                         Submit
                     </Button>

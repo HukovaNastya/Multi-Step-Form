@@ -163,10 +163,13 @@ function OnboardingFormProvider({ children }: FormProviderProps) {
         })
         setUserId(data?.id);
         localStorage.setItem(storageKeys.UserId, JSON.stringify(data?.id))
-        resetFirstForm();
-        resetSecondForm();
-        resetAccountType();
-    }, [firstForm, secondForm, accountType, resetUserData, createUser]);
+        resetUserData()
+        // resetFirstForm();
+        // resetSecondForm();
+        // resetAccountType();
+        // setStep(0);
+        // setModalOpen(false)
+    }, [firstForm, secondForm, accountType, createUser, setModalOpen]);
 
 
     const onTriggerNext = () => {

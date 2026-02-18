@@ -8,6 +8,7 @@ function useUser(userId:string) {
     const [error, setError] = useState(null);
 
     const fetchUserById = useCallback(async (id: string) => {
+        if(!id) return;
         try{
             const data = await getUserById(id);
             return data;
@@ -19,6 +20,7 @@ function useUser(userId:string) {
     }, [setError])
 
     const refetch = () => {
+        if(!userId) return;
         fetchUserById(userId).then((user) => {
             if(user){
                 setUserInfo(user)

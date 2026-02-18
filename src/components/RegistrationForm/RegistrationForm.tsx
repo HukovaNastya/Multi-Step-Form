@@ -14,7 +14,7 @@ import {Steps} from "../RegistrationFormContent/interface.tsx";
 
 const RegistrationForm = () => {
     const { step, isModalOpen } = useOnboardingFormData()
-    const { setModalOpen, onFormSubmit} = useOnboardingFormApi();
+    const { setModalOpen} = useOnboardingFormApi();
     const {loading, error}  = useUserMutation();
 
     // const onFormSubmit = (e: any) => {
@@ -40,7 +40,7 @@ const RegistrationForm = () => {
     return (
         <div>
             <div className='registration-form-wrapper'>
-                <Form className='registration-form d-flex flex-column' onSubmit={onFormSubmit}>
+                <Form className='registration-form d-flex flex-column'>
                     <FormHeader/>
                     <div className='form-stepper-wrapper'>
                         <Stepper
